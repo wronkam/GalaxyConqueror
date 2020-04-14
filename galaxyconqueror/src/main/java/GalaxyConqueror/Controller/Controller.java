@@ -1,6 +1,5 @@
 package GalaxyConqueror.Controller;
 
-import GalaxyConqueror.Model.Bullet;
 import GalaxyConqueror.Model.Ships.Enemy;
 import GalaxyConqueror.Model.Ships.Player;
 import javafx.animation.AnimationTimer;
@@ -8,9 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-
-import java.util.ListIterator;
-
 import static GalaxyConqueror.Controller.ActionControl.*;
 
 
@@ -48,7 +44,7 @@ public class Controller {
                     if (time2 < 0 || time2 > 50) {
 
                         if (Player.isShooting)
-                            shoot(player, 0, -1);
+                            shoot(player, 0, -1, greenbullet);
                         timeLast2 = timeNow;
                     }
                     if (time < 0 || time > 1000) {
@@ -68,10 +64,10 @@ public class Controller {
                         bullets.get(i).move(5);
                     }
                     int dx = 0, dy = 0;
-                    if (goUp) dy -= player.speedY;
-                    if (goDown) dy += player.speedY;
-                    if (goRight) dx -= player.speedX;
-                    if (goLeft) dx += player.speedX;
+                    if (goUp) dy -= 5;
+                    if (goDown) dy += 5;
+                    if (goRight) dx -= 8;
+                    if (goLeft) dx += 8;
                     player.move(dx, dy);
                     Garbage.clean();
                 }

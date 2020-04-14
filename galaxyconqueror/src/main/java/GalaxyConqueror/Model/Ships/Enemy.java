@@ -5,6 +5,7 @@ import javafx.scene.image.ImageView;
 import java.util.Random;
 import static GalaxyConqueror.Controller.Shoot.*;
 import static GalaxyConqueror.Model.Model.*;
+import static GalaxyConqueror.View.View.bullet;
 import static GalaxyConqueror.View.View.enemy;
 
 public class Enemy extends Ship {
@@ -26,7 +27,7 @@ public class Enemy extends Ship {
     }
 
     public void autoShoot() {
-        shoot(this, 0, 1);
+        shoot(this, 0, 1, bullet);
     }
 
 }
