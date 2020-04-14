@@ -19,6 +19,10 @@ Schemat:
 Node -> abstract Bullet -> Spaceship -> each and every enemy
                |                |
                V               > Player
+               1.??????
+               2.??????
+               3.??????
+               4.Profit
 */
 /*
 0.shoot
