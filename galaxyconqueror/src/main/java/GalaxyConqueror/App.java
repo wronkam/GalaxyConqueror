@@ -2,6 +2,7 @@ package GalaxyConqueror;
 
 
 //is maven working in intellij?
+//does it work?
 
 import GalaxyConqueror.Controller.Controller;
 import javafx.application.Application;
