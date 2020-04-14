@@ -1,5 +1,6 @@
 package GalaxyConqueror.Controller;
 
+import GalaxyConqueror.Model.Bullet;
 import GalaxyConqueror.Model.Ships.Enemy;
 import GalaxyConqueror.Model.Ships.Player;
 import javafx.animation.AnimationTimer;
@@ -7,6 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+
+import java.util.ListIterator;
+
 import static GalaxyConqueror.Controller.ActionControl.*;
 
 
@@ -64,10 +68,10 @@ public class Controller {
                         bullets.get(i).move(5);
                     }
                     int dx = 0, dy = 0;
-                    if (goUp) dy -= 5;
-                    if (goDown) dy += 5;
-                    if (goRight) dx -= 8;
-                    if (goLeft) dx += 8;
+                    if (goUp) dy -= player.speedY;
+                    if (goDown) dy += player.speedY;
+                    if (goRight) dx -= player.speedX;
+                    if (goLeft) dx += player.speedX;
                     player.move(dx, dy);
                     Garbage.clean();
                 }

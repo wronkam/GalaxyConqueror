@@ -9,8 +9,11 @@ import static GalaxyConqueror.Model.Model.*;
 import static GalaxyConqueror.View.View.spaceship;
 
 public class Player extends Ship {
-
+    public int speedX;
+    public int speedY;
     public Player () {
+        this.speedX=5;
+        this.speedY=5;
         ship = new ImageView(spaceship);
         moveTo(W / 2, 970);
     }
