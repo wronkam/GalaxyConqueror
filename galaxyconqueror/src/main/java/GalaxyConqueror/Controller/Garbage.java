@@ -5,12 +5,13 @@ import GalaxyConqueror.Model.Bullet;
 import GalaxyConqueror.Model.Ships.Enemy;
 import javafx.scene.Node;
 
+import static GalaxyConqueror.Model.Constants.*;
 import static GalaxyConqueror.Model.Model.*;
 
 public class Garbage {
 
     public static boolean isInBounds (Node x) {
-        return (x.getLayoutX() >= 0 && x.getLayoutX() <= W && x.getLayoutY() >= 0 && x.getLayoutY() <= H);
+        return (x.getLayoutX() >= 0 && x.getLayoutX() <= SCREEN_WIDTH && x.getLayoutY() >= 0 && x.getLayoutY() <= SCREEN_HEIGHT);
     }
 
     public static void clean () {

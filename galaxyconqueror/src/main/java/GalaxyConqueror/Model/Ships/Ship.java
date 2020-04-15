@@ -3,8 +3,7 @@ package GalaxyConqueror.Model.Ships;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
-import static GalaxyConqueror.Model.Model.H;
-import static GalaxyConqueror.Model.Model.W;
+import static GalaxyConqueror.Model.Model.*;
 
 public abstract class Ship {
     public static int hp;
