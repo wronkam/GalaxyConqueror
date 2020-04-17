@@ -10,7 +10,10 @@ public class Bullet {
     public double y;
     public double dirx;
     public double diry;
-
+    public int mvListId;
+    public double mvScale;
+    public int hp;
+    public int dmg;
     public Bullet (Image image, double x, double y, double dirx, double diry) {
         this.x = x;
         this.y = y;
@@ -28,4 +31,5 @@ public class Bullet {
         y += b;
         me.relocate(x,y);
     }
+
 }

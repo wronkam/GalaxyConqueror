@@ -13,7 +13,7 @@ public class Shoot {
     public static void shoot(Ship ship, double dirx, double diry, Image image) {
             Bullet bullet = new Bullet(
                     image,
-                    ship.ship.getLayoutX() + ship.ship.getBoundsInLocal().getWidth() / 2 - 20,
+                    ship.ship.getLayoutX() + ship.ship.getBoundsInLocal().getWidth() / 2-image.getWidth()/2,
                     ship.ship.getLayoutY(), dirx, diry);
             bullets.add(bullet);
             root.getChildren().add(bullet.me);

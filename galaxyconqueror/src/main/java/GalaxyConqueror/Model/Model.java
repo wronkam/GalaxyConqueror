@@ -11,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class Model {
     public static Player player = new Player();
     public static ArrayList<Bullet> bullets = new ArrayList<>();
     public static ArrayList<Enemy> enemies = new ArrayList<>();
+    public static  ArrayList<ArrayList<Pair<Double, Double>>> moveList=new ArrayList<>();
 
     public static VBox box = new VBox();
     public static BorderPane root = new BorderPane(box);

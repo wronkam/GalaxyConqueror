@@ -9,8 +9,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import static GalaxyConqueror.Controller.ActionControl.*;
 
@@ -23,6 +27,28 @@ import static GalaxyConqueror.Model.Model.*;
 
 public class Controller {
     public static void start (Stage stage) {
+        Scanner l = null;
+        try {
+            l = new Scanner(new File("./resources/moveList.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        try {
+            if(l==null)
+                throw new NullPointerException("Scanner imput missing");
+            while (l.hasNext()) {
+                String line = l.nextLine();
+                String[] move = line.split(";");
+                ArrayList<Pair<Double, Double>> Array = new ArrayList<>();
+                for (String cords : move) {
+                    String[] xy = cords.split(",");
+                    Array.add(new Pair<>(Double.parseDouble(xy[0]), Double.parseDouble(xy[1])));
+                }
+                moveList.add(Array);
+            }
+        }catch (Exception e){
+            System.out.println(e+"error on moveList.txt");
+        }
         try {
 
             stage.setTitle("Galaxy Conqueror");
@@ -52,8 +78,7 @@ public class Controller {
             };
 
             timer.start();
-        }
-        catch (Exception e) {
+        }catch (Exception e) {
             e.printStackTrace();
         }
     }

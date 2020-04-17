@@ -2,6 +2,7 @@ package GalaxyConqueror.Model;
 
 public class Constants {
     //TUTAJ TRZEBA OGARNĄĆ CZY POTRZEBNE NAM SĄ INTY CZY DOUBLE
+    //Zdecydowanie double, int w całości nie wykożystamy, a double są natywne do obsługi pozycji i dadzą lepszą dokładność
 
     //ile trwa jeden frame
     public static final double TICK = 1000;
