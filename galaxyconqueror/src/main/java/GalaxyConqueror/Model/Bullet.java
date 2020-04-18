@@ -59,6 +59,7 @@ public class Bullet {
         this.width = BULLET_WIDTH;
         this.height = BULLET_HEIGHT;
         dmg = 1;
+        hp = 1;
     }
     public void move (double c) {
         x += c*dirx;
@@ -99,6 +100,11 @@ public class Bullet {
     public void subtractHp (int d) {
         hp -= d;
     }
+
+    public void kill () {
+        subtractHp(hp);
+    }
+
 
 
 }

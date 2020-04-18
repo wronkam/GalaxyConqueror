@@ -35,7 +35,7 @@ public class Engine {
         }
 
         checkCollisions();
-        checkEnemies();
+        reactToCollisions();
         moveEnemies();
         moveBullets();
         movePlayer();
@@ -79,15 +79,24 @@ public class Engine {
         root.getChildren().add(e.me);
     }
     //usuwa enemiesy, które nie żyją
-    private static void checkEnemies () {
+    private static void reactToCollisions () {
+        if (player.isDead()) {
+            gameOver();
+        }
         ArrayList<ImageView> imagesToRemove = new ArrayList<>();
         for (Enemy e: enemies) {
             if (e.isDead()) {
                 imagesToRemove.add(e.me);
             }
         }
+        for (Bullet b : bullets) {
+            if (b.isDead()) {
+                imagesToRemove.add(b.me);
+            }
+        }
         root.getChildren().removeAll(imagesToRemove);
         enemies.removeIf(Bullet::isDead);
+        bullets.removeIf(Bullet::isDead);
     }
 
     private static void checkCollisions () {
@@ -97,6 +106,7 @@ public class Engine {
                 for (Enemy e : enemies) {
                     if (b.me.getBoundsInParent().intersects(e.me.getBoundsInParent())) {
                         e.subtractHp(b.getDmg());
+                        b.kill();
                     }
                 }
             }
@@ -104,11 +114,14 @@ public class Engine {
             if (b.collisionId == 1) {
                 if (b.me.getBoundsInParent().intersects(player.me.getBoundsInParent()) ) {
                     player.subtractHp(b.getDmg());
+                    b.kill();
                 }
             }
         }
     }
 
-
+    private static void gameOver () {
+        System.out.println("Game over");
+    }
 
 }

@@ -16,7 +16,7 @@ public class Player extends Ship {
         width = PLAYER_WIDTH;
         height = PLAYER_HEIGHT;
         collisionId = 0;
-        hp = 100;
+        hp = 10;
         me = new ImageView(spaceship);
         moveTo(SCREEN_WIDTH / 2, 970);
     }
