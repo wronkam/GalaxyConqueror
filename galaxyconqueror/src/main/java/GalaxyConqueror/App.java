@@ -5,6 +5,7 @@ package GalaxyConqueror;
 //does it work?
 
 import GalaxyConqueror.Controller.Controller;
+import GalaxyConqueror.Controller.Menu;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -38,6 +39,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        Controller.start(stage);
+        Menu.start(stage);
     }
 }
