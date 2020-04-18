@@ -7,6 +7,6 @@ import javafx.scene.image.ImageView;
 import static GalaxyConqueror.Model.Model.*;
 
 public abstract class Ship extends Bullet {
-    public static boolean isShooting;
+    public boolean isShooting;
 
 }

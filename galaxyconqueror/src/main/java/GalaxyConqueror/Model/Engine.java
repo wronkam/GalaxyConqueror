@@ -3,6 +3,9 @@ package GalaxyConqueror.Model;
 import GalaxyConqueror.Controller.Garbage;
 import GalaxyConqueror.Model.Ships.Enemy;
 import GalaxyConqueror.Model.Ships.Player;
+import javafx.scene.image.ImageView;
+
+import java.util.ArrayList;
 
 import static GalaxyConqueror.Controller.ActionControl.*;
 import static GalaxyConqueror.Controller.ActionControl.goLeft;
@@ -30,6 +33,9 @@ public class Engine {
             shootAndSpawnEnemies();
             enemySpawnLast = timeNow;
         }
+
+        checkCollisions();
+        checkEnemies();
         moveEnemies();
         moveBullets();
         movePlayer();
@@ -58,7 +64,7 @@ public class Engine {
     }
 
     private static void shootPlayer () {
-        if (Player.isShooting)
+        if (player.isShooting)
             shoot(player, 0, -1, greenbullet, player.collisionId);
     }
 
@@ -74,12 +80,14 @@ public class Engine {
     }
     //usuwa enemiesy, które nie żyją
     private static void checkEnemies () {
-        for (Enemy e : enemies) {
+        ArrayList<ImageView> imagesToRemove = new ArrayList<>();
+        for (Enemy e: enemies) {
             if (e.isDead()) {
-                enemies.remove(e);
-                root.getChildren().remove(e.me);
+                imagesToRemove.add(e.me);
             }
         }
+        root.getChildren().removeAll(imagesToRemove);
+        enemies.removeIf(Bullet::isDead);
     }
 
     private static void checkCollisions () {
@@ -87,17 +95,15 @@ public class Engine {
             //pociski Playera
             if (b.collisionId == 0) {
                 for (Enemy e : enemies) {
-                    if (b.me.intersects(e.getX(), e.getY(),
-                            e.getWidth(), e.getHeight()) ) {
-                        e.substractHp(b.getDmg());
+                    if (b.me.getBoundsInParent().intersects(e.me.getBoundsInParent())) {
+                        e.subtractHp(b.getDmg());
                     }
                 }
             }
             //pociski enemiesów
             if (b.collisionId == 1) {
-                if (b.me.intersects(player.getX(), player.getY(),
-                        player.getWidth(), player.getHeight()) ) {
-                    player.substractHp(b.getDmg());
+                if (b.me.getBoundsInParent().intersects(player.me.getBoundsInParent()) ) {
+                    player.subtractHp(b.getDmg());
                 }
             }
         }

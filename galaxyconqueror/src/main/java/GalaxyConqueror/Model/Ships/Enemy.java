@@ -11,8 +11,10 @@ import static GalaxyConqueror.View.View.enemy;
 import static java.awt.image.ImageObserver.WIDTH;
 
 public class Enemy extends Ship {
-    public static Random rand = new Random();
+    private static Random rand = new Random();
     public Enemy () {
+        width = ENEMY_WIDTH;
+        height = ENEMY_HEIGHT;
         collisionId = 1;
         hp = 1;
         me = new ImageView(enemy);
@@ -30,7 +32,7 @@ public class Enemy extends Ship {
     }
 
     public void autoShoot() {
-        shoot(this, 0, 1, bullet, collisionId);
+        shoot(this, 0, 1, bullet, this.collisionId);
     }
 
 }

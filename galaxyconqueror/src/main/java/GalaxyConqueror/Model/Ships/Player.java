@@ -13,6 +13,8 @@ import static GalaxyConqueror.View.View.spaceship;
 public class Player extends Ship {
 
     public Player () {
+        width = PLAYER_WIDTH;
+        height = PLAYER_HEIGHT;
         collisionId = 0;
         hp = 100;
         me = new ImageView(spaceship);
