@@ -22,8 +22,8 @@ public class Garbage {
             }
         }
         for (int i = 0; i < enemies.size(); i++) {
-            if (!isInBounds(enemies.get(i).ship)) {
-                root.getChildren().remove(enemies.get(i).ship);
+            if (!isInBounds(enemies.get(i).me)) {
+                root.getChildren().remove(enemies.get(i).me);
                 enemies.remove(i);
             }
         }

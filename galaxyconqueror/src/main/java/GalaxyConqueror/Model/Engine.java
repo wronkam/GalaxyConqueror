@@ -59,7 +59,7 @@ public class Engine {
 
     private static void shootPlayer () {
         if (Player.isShooting)
-            shoot(player, 0, -1, greenbullet);
+            shoot(player, 0, -1, greenbullet, player.collisionId);
     }
 
     //na ten moment enemiesy się respią w tym samym czasie co strzelają
@@ -70,7 +70,39 @@ public class Engine {
 
         Enemy e = new Enemy();
         enemies.add(e);
-        root.getChildren().add(e.ship);
+        root.getChildren().add(e.me);
     }
+    //usuwa enemiesy, które nie żyją
+    private static void checkEnemies () {
+        for (Enemy e : enemies) {
+            if (e.isDead()) {
+                enemies.remove(e);
+                root.getChildren().remove(e.me);
+            }
+        }
+    }
+
+    private static void checkCollisions () {
+        for (Bullet b : bullets) {
+            //pociski Playera
+            if (b.collisionId == 0) {
+                for (Enemy e : enemies) {
+                    if (b.me.intersects(e.getX(), e.getY(),
+                            e.getWidth(), e.getHeight()) ) {
+                        e.substractHp(b.getDmg());
+                    }
+                }
+            }
+            //pociski enemiesów
+            if (b.collisionId == 1) {
+                if (b.me.intersects(player.getX(), player.getY(),
+                        player.getWidth(), player.getHeight()) ) {
+                    player.substractHp(b.getDmg());
+                }
+            }
+        }
+    }
+
+
 
 }

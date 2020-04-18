@@ -54,7 +54,7 @@ public class Controller {
             stage.setTitle("Galaxy Conqueror");
             box.getChildren().add(splashView);
 
-            root.getChildren().add(player.ship);
+            root.getChildren().add(player.me);
             Scene scene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT);
             stage.setScene(scene);
 

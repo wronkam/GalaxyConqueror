@@ -13,8 +13,9 @@ import static java.awt.image.ImageObserver.WIDTH;
 public class Enemy extends Ship {
     public static Random rand = new Random();
     public Enemy () {
-
-        ship = new ImageView(enemy);
+        collisionId = 1;
+        hp = 1;
+        me = new ImageView(enemy);
         moveTo(rand.nextInt(SCREEN_WIDTH), 50);
         //moveTo (W/2, H/2);
     }
@@ -29,7 +30,7 @@ public class Enemy extends Ship {
     }
 
     public void autoShoot() {
-        shoot(this, 0, 1, bullet);
+        shoot(this, 0, 1, bullet, collisionId);
     }
 
 }
