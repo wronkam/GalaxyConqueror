@@ -1,5 +1,6 @@
 package GalaxyConqueror.Model.Ships;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.Random;

@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import static GalaxyConqueror.View.View.background;
 
 public class Model {
+    public static boolean gameOver = false;
     public static VBox box = new VBox();
     public static ImageView splashView = new ImageView(background);
     public static Pane root = new Pane(box);

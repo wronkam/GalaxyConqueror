@@ -118,6 +118,12 @@ public class Engine {
                 }
             }
         }
+        for (Enemy e : enemies) {
+            if (e.me.getBoundsInParent().intersects(player.me.getBoundsInParent())) {
+                player.kill();
+            }
+        }
+
     }
 
     private static void gameOver () {
