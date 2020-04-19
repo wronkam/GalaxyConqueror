@@ -10,6 +10,7 @@ public class Constants {
     //o ile się poruszają obiekty
     public static final double PLAYER_DX = 8;
     public static final double PLAYER_DY = 8;
+    public static final double PLAYER_ROT = 5;
     public static final int ENEMY_DX = 0;
     public static final int ENEMY_DY = 2;
     public static final double BULLET_DX = 8;

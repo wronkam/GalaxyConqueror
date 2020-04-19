@@ -2,9 +2,7 @@ package GalaxyConqueror.View;
 
 import javafx.scene.image.Image;
 
-
 import static GalaxyConqueror.Model.Constants.*;
-import static GalaxyConqueror.Model.Model.*;
 
 public class View {
     public static Image spaceship = new Image("file:resources/spaceship.png", PLAYER_WIDTH, PLAYER_HEIGHT, true, true);

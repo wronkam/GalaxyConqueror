@@ -2,7 +2,6 @@ package GalaxyConqueror.Model;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.util.Pair;
 
 import static GalaxyConqueror.Model.Constants.BULLET_HEIGHT;
 import static GalaxyConqueror.Model.Constants.BULLET_WIDTH;
@@ -16,6 +15,7 @@ public class Bullet {
     public double width;
     public double dirx;
     public double diry;
+    public double radius;
     public int mvListId;
     public double mvScale;
     public int hp;
@@ -49,7 +49,7 @@ public class Bullet {
     public Bullet () {
     }
 
-    public Bullet (Image image, double x, double y, double dirx, double diry, int collisionId) {
+    public Bullet (Image image, double x, double y, double dirx, double diry, int collisionId,double direction) {
         this.x = x;
         this.y = y;
         this.me = new ImageView(image);
@@ -58,6 +58,8 @@ public class Bullet {
         this.collisionId = collisionId;
         this.width = BULLET_WIDTH;
         this.height = BULLET_HEIGHT;
+        me.setRotate(direction);
+        radius=image.getHeight()/2;
         dmg = 1;
         hp = 1;
     }
@@ -72,8 +74,8 @@ public class Bullet {
 //        me.relocate(x,y);
 //    }
 
-    public void move(int dx, int dy) {
-        if (dx == 0 && dy == 0)
+    public void move(double dx, double dy,double rotate) {
+        if (dx == 0 && dy == 0 && rotate==0)
         {
             return;
         }
@@ -81,6 +83,7 @@ public class Bullet {
         final double cy = me.getBoundsInLocal().getHeight() / 2;
         double x = cx + me.getLayoutX() + dx;
         double y = cy + me.getLayoutY() + dy;
+        me.setRotate(me.getRotate()+rotate);
         moveTo(x, y);
     }
 

@@ -2,18 +2,14 @@ package GalaxyConqueror.Model;
 
 import GalaxyConqueror.Controller.Garbage;
 import GalaxyConqueror.Model.Ships.Enemy;
-import GalaxyConqueror.Model.Ships.Player;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 
 import static GalaxyConqueror.Controller.ActionControl.*;
-import static GalaxyConqueror.Controller.ActionControl.goLeft;
 import static GalaxyConqueror.Controller.Shoot.shoot;
 import static GalaxyConqueror.Model.Constants.*;
-import static GalaxyConqueror.Model.Constants.PLAYER_DX;
 import static GalaxyConqueror.Model.Model.*;
-import static GalaxyConqueror.Model.Model.bullets;
 import static GalaxyConqueror.View.View.greenbullet;
 
 public class Engine {
@@ -44,12 +40,14 @@ public class Engine {
     }
 
     private static void movePlayer() {
-        int dx = 0, dy = 0;
+        double dx = 0, dy = 0,rotate=0;
         if (goUp) dy -= PLAYER_DY;
         if (goDown) dy += PLAYER_DY;
         if (goRight) dx -= PLAYER_DX;
         if (goLeft) dx += PLAYER_DX;
-        player.move(dx, dy);
+        if (rotateLeft) rotate -= PLAYER_DX;
+        if (rotateRight) rotate += PLAYER_DX;
+        player.move(dx, dy,rotate);
     }
 
     private static void moveBullets() {
@@ -74,7 +72,7 @@ public class Engine {
             enemy.autoShoot();
         }
 
-        Enemy e = new Enemy();
+        Enemy e = new Enemy(90);
         enemies.add(e);
         root.getChildren().add(e.me);
     }

@@ -1,13 +1,8 @@
 package GalaxyConqueror.Model.Ships;
 
-import GalaxyConqueror.Model.Ships.Ship;
-
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import static GalaxyConqueror.Model.Constants.*;
-
-import static GalaxyConqueror.Model.Model.*;
 import static GalaxyConqueror.View.View.spaceship;
 
 public class Player extends Ship {
@@ -19,6 +14,8 @@ public class Player extends Ship {
         hp = 10;
         me = new ImageView(spaceship);
         moveTo(SCREEN_WIDTH / 2, 970);
+        me.setRotate(-90);
+        radius=me.getBoundsInLocal().getHeight()/2;
     }
     @Override
     public void moveTo(double x, double y)
