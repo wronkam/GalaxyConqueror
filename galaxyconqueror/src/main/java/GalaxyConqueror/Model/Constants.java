@@ -10,7 +10,7 @@ public class Constants {
     //o ile się poruszają obiekty
     public static final double PLAYER_DX = 8;
     public static final double PLAYER_DY = 8;
-    public static final double PLAYER_ROT = 5;
+    public static final double PLAYER_ROT = 4;
     public static final int ENEMY_DX = 0;
     public static final int ENEMY_DY = 1;
     public static final double BULLET_DX = 5;
@@ -20,7 +20,7 @@ public class Constants {
     public static final double ENEMY_SPAWN_TICK = 1000;
 
     //delaye
-    public static final double BULLET_DELAY = 100;
+    public static final double BULLET_DELAY = 300;
 
     //wymiary planszy
     public static  final int SCREEN_WIDTH = 1920;
