@@ -46,8 +46,8 @@ public class Engine {
         if (goDown) dy += PLAYER_DY;
         if (goRight) dx -= PLAYER_DX;
         if (goLeft) dx += PLAYER_DX;
-        if (rotateLeft) rotate -= PLAYER_DX;
-        if (rotateRight) rotate += PLAYER_DX;
+        if (rotateLeft) rotate -= PLAYER_DX*0.25;
+        if (rotateRight) rotate += PLAYER_DX*0.25;
         player.move(dx, dy,rotate);
     }
 
@@ -63,8 +63,10 @@ public class Engine {
     }
 
     private static void shootPlayer () {
-        if (player.isShooting)
-            shoot(player, 0, -1, greenbullet, player.collisionId);
+        if (player.isShooting) {
+            shoot(player, Math.cos(Math.toRadians(player.me.getRotate())), Math.sin(Math.toRadians(player.me.getRotate())), greenbullet, player.collisionId);
+            System.out.println(player.me.getRotate());
+        }
     }
 
     //na ten moment enemiesy się respią w tym samym czasie co strzelają

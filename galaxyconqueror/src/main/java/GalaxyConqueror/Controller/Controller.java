@@ -92,6 +92,7 @@ public class Controller {
                 public void handle(long now) {
                     if (now - last >= TICK) {
                         if(player.isDead() && temp == 0) {
+                            hpLabel.setText("HP: " + 0); //no to powinno być zmienione
                             temp = 1;
                             this.stop();
                             VBox ShowScore = new VBox();
