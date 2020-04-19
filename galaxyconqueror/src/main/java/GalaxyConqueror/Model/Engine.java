@@ -46,8 +46,8 @@ public class Engine {
         if (goDown) dy += PLAYER_DY;
         if (goRight) dx -= PLAYER_DX;
         if (goLeft) dx += PLAYER_DX;
-        if (rotateLeft) rotate -= PLAYER_DX*0.25;
-        if (rotateRight) rotate += PLAYER_DX*0.25;
+        if (rotateLeft) rotate -= PLAYER_ROT;
+        if (rotateRight) rotate += PLAYER_ROT;
         player.move(dx, dy,rotate);
     }
 
