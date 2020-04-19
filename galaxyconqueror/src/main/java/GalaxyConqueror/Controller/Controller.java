@@ -91,7 +91,7 @@ public class Controller {
                 @Override
                 public void handle(long now) {
                     if (now - last >= TICK) {
-                        if(player.isDead() && temp == 0) {
+                        if(player.isDead() && temp == 0) { //totalnie tymczasowe rozwiazanie gameover, zostanie o zmienione jak najszybciej
                             temp = 1;
                             this.stop();
                             VBox ShowScore = new VBox();
