@@ -1,5 +1,6 @@
 package GalaxyConqueror.Controller;
 
+import javafx.animation.AnimationTimer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,6 +10,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.util.ArrayList;
+import static GalaxyConqueror.Model.Constants.*;
 import static GalaxyConqueror.View.View.menubg;
 
 /* First version of main menu
@@ -30,13 +33,15 @@ public class Menu {
         Button ExitButton = new Button("Exit");
 
         NewGameButton.setPrefSize(200, 60);
-        NewGameButton.setStyle("-fx-border-color: #ffffff; -fx-border-width:3px; -fx-background-color: transparent; -fx-text-fill: #ffffff; -fx-font-size: 15");
         SettingsButton.setPrefSize(200, 60);
-        SettingsButton.setStyle("-fx-border-color: #ffffff; -fx-border-width:3px; -fx-background-color: transparent; -fx-text-fill: #ffffff; -fx-font-size: 15");
         HsButton.setPrefSize(200, 60);
-        HsButton.setStyle("-fx-border-color: #ffffff; -fx-border-width:3px; -fx-background-color: transparent; -fx-text-fill: #ffffff; -fx-font-size: 15");
         ExitButton.setPrefSize(200, 60);
-        ExitButton.setStyle("-fx-border-color: #ffffff; -fx-border-width:3px; -fx-background-color: transparent; -fx-text-fill: #ffffff; -fx-font-size: 15");
+
+        ArrayList<Button> buttons = new ArrayList<>();
+        buttons.add(NewGameButton);
+        buttons.add(SettingsButton);
+        buttons.add(HsButton);
+        buttons.add(ExitButton);
 
         NewGameButton.setOnAction(value -> Controller.start(stage));
         SettingsButton.setOnAction(value -> SettingsButton.setText("Work in progress"));
@@ -64,9 +69,28 @@ public class Menu {
         menu.getChildren().add(bg);
         menu.getChildren().add(test);
 
-        Scene scene = new Scene(menu, 1920, 1080);
+        Scene scene = new Scene(menu, SCREEN_WIDTH, SCREEN_HEIGHT);
         stage.setScene(scene);
         stage.show();
+
+        try
+        {
+            AnimationTimer timer = new AnimationTimer() {
+                @Override
+                public void handle(long now) {
+                    for (Button button : buttons) {
+                        if (button.isHover()) {
+                            button.setStyle("-fx-border-color: #00ff00; -fx-border-width:3px; -fx-background-color: transparent; -fx-text-fill: #00ff00; -fx-font-size: 15");
+                        } else {
+                            button.setStyle("-fx-border-color: #ffffff; -fx-border-width:3px; -fx-background-color: transparent; -fx-text-fill: #ffffff; -fx-font-size: 15");
+                        }
+                    }
+                }
+            };
+            timer.start();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 
