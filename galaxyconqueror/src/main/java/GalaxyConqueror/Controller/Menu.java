@@ -30,9 +30,13 @@ public class Menu {
         Button ExitButton = new Button("Exit");
 
         NewGameButton.setPrefSize(200, 60);
+        NewGameButton.setStyle("-fx-border-color: #ffffff; -fx-border-width:3px; -fx-background-color: transparent; -fx-text-fill: #ffffff; -fx-font-size: 15");
         SettingsButton.setPrefSize(200, 60);
+        SettingsButton.setStyle("-fx-border-color: #ffffff; -fx-border-width:3px; -fx-background-color: transparent; -fx-text-fill: #ffffff; -fx-font-size: 15");
         HsButton.setPrefSize(200, 60);
+        HsButton.setStyle("-fx-border-color: #ffffff; -fx-border-width:3px; -fx-background-color: transparent; -fx-text-fill: #ffffff; -fx-font-size: 15");
         ExitButton.setPrefSize(200, 60);
+        ExitButton.setStyle("-fx-border-color: #ffffff; -fx-border-width:3px; -fx-background-color: transparent; -fx-text-fill: #ffffff; -fx-font-size: 15");
 
         NewGameButton.setOnAction(value -> Controller.start(stage));
         SettingsButton.setOnAction(value -> SettingsButton.setText("Work in progress"));
