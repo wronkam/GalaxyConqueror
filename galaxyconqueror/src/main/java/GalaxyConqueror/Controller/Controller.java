@@ -4,8 +4,10 @@ import GalaxyConqueror.Model.Bullet;
 import GalaxyConqueror.Model.Ships.Enemy;
 import GalaxyConqueror.Model.Ships.Player;
 import javafx.animation.AnimationTimer;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -84,14 +86,38 @@ public class Controller {
 
             AnimationTimer timer = new AnimationTimer() {
                 private long last = 0;
+                private int temp = 0;
 
                 @Override
                 public void handle(long now) {
-
-
                     if (now - last >= TICK) {
-                        engine();
-                        last = now;
+                        if(player.isDead() && temp == 0) {
+                            temp = 1;
+                            this.stop();
+                            VBox ShowScore = new VBox();
+                            Label result = new Label();
+                            result.setText("Your score: " + score);
+                            result.setStyle("-fx-text-fill: #00ff00; -fx-font-size: 80; -fx-font-weight: bold; -fx-background-color: transparent;");
+                            ShowScore.setPadding(new Insets(440,0 , 0, 700));
+                            ShowScore.setSpacing(40);
+                            ShowScore.getChildren().add(result);
+                            Button ExitGame = new Button();
+                            int xd = 0;
+                            while(score >= 10){
+                                xd++;
+                                score = score / 10;
+                            }
+                            ExitGame.setPrefSize(590 + xd * 50, 100);
+                            ExitGame.setText("Exit");
+                            ExitGame.setOnAction(value -> Menu.start(stage));
+                            ExitGame.setStyle("-fx-border-color: #ffffff; -fx-border-width:3px; -fx-background-color: transparent; -fx-text-fill: #00ff00; -fx-font-size: 15; -fx-font-size: 35; -fx-border-color: #00ff00 ");
+                            ShowScore.getChildren().add(ExitGame);
+                            root.getChildren().add(ShowScore);
+                        }
+                        else {
+                            engine();
+                            last = now;
+                        }
                     }
                 }
             };

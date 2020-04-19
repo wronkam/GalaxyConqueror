@@ -16,7 +16,6 @@ public class Engine {
     private static long enemySpawnLast = 0;
     private static long bulletDelayLast = 0;
 
-
     public static void engine() {
         scoreLabel.setText("Score: " + score);
         hpLabel.setText("HP: " + player.hp);
