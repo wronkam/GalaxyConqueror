@@ -18,6 +18,8 @@ public class Engine {
 
 
     public static void engine() {
+        scoreLabel.setText("Score: " + score);
+        hpLabel.setText("HP: " + player.hp);
         long timeNow = System.currentTimeMillis();
         long bulletDelay = timeNow - bulletDelayLast;
         long enemySpawn = timeNow - enemySpawnLast;
@@ -84,6 +86,7 @@ public class Engine {
         ArrayList<ImageView> imagesToRemove = new ArrayList<>();
         for (Enemy e: enemies) {
             if (e.isDead()) {
+                score += e.scoreForDeath;
                 imagesToRemove.add(e.me);
             }
         }

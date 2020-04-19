@@ -5,22 +5,22 @@ public class Constants {
     //Zdecydowanie double, int w całości nie wykożystamy, a double są natywne do obsługi pozycji i dadzą lepszą dokładność
 
     //ile trwa jeden frame
-    public static final double TICK = 1000;
+    public static final double TICK = 100000;
 
     //o ile się poruszają obiekty
     public static final double PLAYER_DX = 8;
     public static final double PLAYER_DY = 8;
     public static final double PLAYER_ROT = 5;
     public static final int ENEMY_DX = 0;
-    public static final int ENEMY_DY = 2;
-    public static final double BULLET_DX = 8;
-    public static final double BULLET_DY = 8;
+    public static final int ENEMY_DY = 1;
+    public static final double BULLET_DX = 5;
+    public static final double BULLET_DY = 5;
 
     //co ile się spawnią rzeczy
     public static final double ENEMY_SPAWN_TICK = 1000;
 
     //delaye
-    public static final double BULLET_DELAY = 50;
+    public static final double BULLET_DELAY = 100;
 
     //wymiary planszy
     public static  final int SCREEN_WIDTH = 1920;

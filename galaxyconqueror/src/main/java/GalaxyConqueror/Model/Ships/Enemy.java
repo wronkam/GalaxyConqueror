@@ -11,6 +11,7 @@ import static GalaxyConqueror.View.View.enemy;
 
 public class Enemy extends Ship {
     private static Random rand = new Random();
+    public int scoreForDeath = 10;
     public Enemy (double direction) {
         width = ENEMY_WIDTH;
         height = ENEMY_HEIGHT;

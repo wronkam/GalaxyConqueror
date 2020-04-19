@@ -4,10 +4,18 @@ import GalaxyConqueror.Model.Bullet;
 import GalaxyConqueror.Model.Ships.Enemy;
 import GalaxyConqueror.Model.Ships.Player;
 import javafx.animation.AnimationTimer;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
@@ -50,17 +58,28 @@ public class Controller {
             System.out.println(e+"error on moveList.txt");
         }
         try {
-
+            VBox labels = new VBox();
+          //  labels.setSpacing(10);
+         //   scoreLabel.setMinWidth(SCREEN_WIDTH);
+            hpLabel.setTextFill(Color.WHITE);
+            hpLabel.setAlignment(Pos.TOP_LEFT);
+            hpLabel.setFont(new Font(40));
+            scoreLabel.setTextFill(Color.WHITE);
+            scoreLabel.setAlignment(Pos.TOP_LEFT);
+            scoreLabel.setFont(new Font(40));
+         //   scoreLabel.setTranslateY(20);
+            labels.getChildren().addAll(scoreLabel, hpLabel);
             stage.setTitle("Galaxy Conqueror");
             box.getChildren().add(splashView);
-
             root.getChildren().add(player.me);
+            root.getChildren().addAll(labels);
             Scene scene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT);
             stage.setScene(scene);
 
             stage.show();
             scene.addEventFilter(KeyEvent.KEY_PRESSED, ActionControl::keyPressed);
             scene.addEventFilter(KeyEvent.KEY_RELEASED, ActionControl::keyReleased);
+
 
 
             AnimationTimer timer = new AnimationTimer() {
