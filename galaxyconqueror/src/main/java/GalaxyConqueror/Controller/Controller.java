@@ -99,7 +99,7 @@ public class Controller {
                             Label result = new Label();
                             result.setText("Your score: " + score);
                             result.setStyle("-fx-text-fill: #00ff00; -fx-font-size: 80; -fx-font-weight: bold; -fx-background-color: transparent;");
-                            ShowScore.setPadding(new Insets(440,0 , 0, 700));
+                            ShowScore.setPadding(new Insets(400,0 , 0, 640));
                             ShowScore.setSpacing(40);
                             ShowScore.getChildren().add(result);
                             Button ExitGame = new Button();
