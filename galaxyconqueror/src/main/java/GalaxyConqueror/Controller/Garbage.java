@@ -15,13 +15,13 @@ public class Garbage {
     }
 
     public static void clean () {
-        for (int i = 0; i < bullets.size(); i++) {
+        for (int i = bullets.size()-1; i >= 0; i--) {
             if (!isInBounds(bullets.get(i).me)) {
                 root.getChildren().remove(bullets.get(i).me);
                 bullets.remove(i);
             }
         }
-        for (int i = 0; i < enemies.size(); i++) {
+        for (int i = enemies.size()-1; i >= 0; i--) {
             if (!isInBounds(enemies.get(i).me)) {
                 root.getChildren().remove(enemies.get(i).me);
                 enemies.remove(i);
