@@ -13,8 +13,11 @@ public class Restart {
         player.hp = 10;
         score = 0;
         for(int i = enemies.size()-1; i >= 0; i--) {
-            root.getChildren().remove(enemies.get(i).me);
-            enemies.remove(i);
+            if(enemies.get(i).collisionId != 2)
+            {
+                root.getChildren().remove(enemies.get(i).me);
+                enemies.remove(i);
+            }
         }
         for(int i = bullets.size()-1; i >= 0; i--) {
             root.getChildren().remove(bullets.get(i).me);

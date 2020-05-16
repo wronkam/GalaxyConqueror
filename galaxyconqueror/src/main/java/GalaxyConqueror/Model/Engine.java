@@ -2,6 +2,7 @@ package GalaxyConqueror.Model;
 
 import GalaxyConqueror.Controller.Garbage;
 import GalaxyConqueror.Model.Ships.Enemy;
+import javafx.geometry.Bounds;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
@@ -130,12 +131,16 @@ public class Engine {
         }
         for (Enemy e : enemies) {
             if(e.collisionId==1) {
-                if (e.me.getBoundsInParent().intersects(player.me.getBoundsInParent())) {
-                    player.kill();
+                Bounds enemyBounds = e.me.localToScene(e.me.getBoundsInLocal());
+                Bounds playerBounds = player.me.localToScene(player.me.getBoundsInLocal());
+                double x = playerBounds.getMinX() + player.width / 2;
+                double y = playerBounds.getMinY() + player.height / 2;
+                if((x + 10 >= enemyBounds.getMinX() && x - 10 <= enemyBounds.getMaxX()) &&
+                        (y + 10 >= enemyBounds.getMinY() && y - 10 <= enemyBounds.getMaxY())){
+                            player.kill();
                 }
             }
         }
-
     }
 
     private static void gameOver () {
