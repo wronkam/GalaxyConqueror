@@ -36,6 +36,8 @@ import static GalaxyConqueror.View.View.*;
 import static GalaxyConqueror.Model.Model.*;
 
 public class Controller {
+    static int first = 0;
+    static Scene scene = null;
     public static void start (Stage stage) {
         Scanner l = null;
         try {
@@ -60,30 +62,27 @@ public class Controller {
             System.out.println(e+"error on moveList.txt");
         }
         try {
-            VBox labels = new VBox();
-          //  labels.setSpacing(10);
-         //   scoreLabel.setMinWidth(SCREEN_WIDTH);
-            hpLabel.setTextFill(Color.WHITE);
-            hpLabel.setAlignment(Pos.TOP_LEFT);
-            hpLabel.setFont(new Font(40));
-            scoreLabel.setTextFill(Color.WHITE);
-            scoreLabel.setAlignment(Pos.TOP_LEFT);
-            scoreLabel.setFont(new Font(40));
-         //   scoreLabel.setTranslateY(20);
-            labels.getChildren().addAll(scoreLabel, hpLabel);
-            stage.setTitle("Galaxy Conqueror");
-            box.getChildren().add(splashView);
-            root.getChildren().add(player.me);
-            root.getChildren().addAll(labels);
-            Scene scene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT);
+            if(first == 0) {
+                first++;
+                VBox labels = new VBox();
+                hpLabel.setTextFill(Color.WHITE);
+                hpLabel.setAlignment(Pos.TOP_LEFT);
+                hpLabel.setFont(new Font(40));
+                scoreLabel.setTextFill(Color.WHITE);
+                scoreLabel.setAlignment(Pos.TOP_LEFT);
+                scoreLabel.setFont(new Font(40));
+                labels.getChildren().addAll(scoreLabel, hpLabel);
+                stage.setTitle("Galaxy Conqueror");
+                box.getChildren().add(splashView);
+                root.getChildren().add(player.me);
+                root.getChildren().addAll(labels);
+                scene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT);
+                scene.addEventFilter(KeyEvent.KEY_PRESSED, ActionControl::keyPressed);
+                scene.addEventFilter(KeyEvent.KEY_RELEASED, ActionControl::keyReleased);
+            }
+            Restart.reset();
             stage.setScene(scene);
-
             stage.show();
-            scene.addEventFilter(KeyEvent.KEY_PRESSED, ActionControl::keyPressed);
-            scene.addEventFilter(KeyEvent.KEY_RELEASED, ActionControl::keyReleased);
-
-
-
             AnimationTimer timer = new AnimationTimer() {
                 private long last = 0;
                 private int temp = 0;
@@ -103,14 +102,18 @@ public class Controller {
                             ShowScore.setSpacing(40);
                             ShowScore.getChildren().add(result);
                             Button ExitGame = new Button();
-                            int xd = 0;
+                            int right = 0;
                             while(score >= 10){
-                                xd++;
+                                right++;
                                 score = score / 10;
                             }
-                            ExitGame.setPrefSize(590 + xd * 50, 100);
+                            ExitGame.setPrefSize(590 + right * 50, 100);
                             ExitGame.setText("Exit");
-                            ExitGame.setOnAction(value -> Menu.start(stage));
+                            ExitGame.setOnAction(value ->
+                            {
+                                Menu.start(stage);
+                                root.getChildren().remove(ShowScore);
+                            });
                             ExitGame.setStyle("-fx-border-color: #ffffff; -fx-border-width:3px; -fx-background-color: transparent; -fx-text-fill: #00ff00; -fx-font-size: 15; -fx-font-size: 35; -fx-border-color: #00ff00 ");
                             ShowScore.getChildren().add(ExitGame);
                             root.getChildren().add(ShowScore);
