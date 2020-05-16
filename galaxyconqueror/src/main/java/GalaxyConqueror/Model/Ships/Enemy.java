@@ -22,6 +22,10 @@ public class Enemy extends Ship {
         gun.add(x,del);
         return this;
     }
+    public Enemy addBullet(Bullet x,int del,int tim){
+        gun.add(x,del,tim);
+        return this;
+    }
     public Enemy addBullet(Factory<? extends Ship,Bullet> x){
         for(int i=0;i<x.ammo.size();i++){
             gun.ammo.add(x.ammo.get(i));

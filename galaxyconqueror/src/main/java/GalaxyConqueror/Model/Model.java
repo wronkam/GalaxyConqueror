@@ -24,6 +24,7 @@ public class Model {
     public static ArrayList<Bullet> bullets = new ArrayList<>();
     public static ArrayList<Enemy> enemies = new ArrayList<>();
     public static  ArrayList<ArrayList<moveVal>> moveList=new ArrayList<>();
+    public static ArrayList<Enemy> BGFactories=new ArrayList<>();
     public static ArrayList<Enemy> templateEnemies;
     public static ArrayList<Bullet> templateBullets;
     public static class moveVal {
