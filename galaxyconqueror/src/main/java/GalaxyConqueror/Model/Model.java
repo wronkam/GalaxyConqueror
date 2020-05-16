@@ -1,22 +1,12 @@
 package GalaxyConqueror.Model;
 
 
-import GalaxyConqueror.Controller.ActionControl;
 import GalaxyConqueror.Model.Ships.Enemy;
 import GalaxyConqueror.Model.Ships.Player;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.util.Pair;
-
 
 import java.util.ArrayList;
 
@@ -33,7 +23,19 @@ public class Model {
     public static Player player = new Player();
     public static ArrayList<Bullet> bullets = new ArrayList<>();
     public static ArrayList<Enemy> enemies = new ArrayList<>();
-    public static  ArrayList<ArrayList<Pair<Double, Double>>> moveList=new ArrayList<>();
+    public static  ArrayList<ArrayList<moveVal>> moveList=new ArrayList<>();
+    public static ArrayList<Enemy> templateEnemies;
+    public static ArrayList<Bullet> templateBullets;
+    public static class moveVal {
+        public double x;
+        public double y;
+        public double rotation;
+        public moveVal(double x, double y, double rot){
+            this.x=x;
+            this.y=y;
+            this.rotation=rot;
+        }
+    }
 
 
 

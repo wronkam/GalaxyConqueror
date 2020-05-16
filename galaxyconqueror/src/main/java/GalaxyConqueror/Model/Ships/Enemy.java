@@ -1,41 +1,45 @@
 package GalaxyConqueror.Model.Ships;
 
+import GalaxyConqueror.Model.Bullet;
+import GalaxyConqueror.Model.Factory;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
-import java.util.Random;
-
-import static GalaxyConqueror.Controller.Shoot.shoot;
-import static GalaxyConqueror.Model.Constants.*;
-import static GalaxyConqueror.View.View.bullet;
-import static GalaxyConqueror.View.View.enemy;
+import static GalaxyConqueror.Model.Constants.ENEMY_HEIGHT;
+import static GalaxyConqueror.Model.Constants.ENEMY_WIDTH;
 
 public class Enemy extends Ship {
-    private static Random rand = new Random();
     public int scoreForDeath = 10;
-    public Enemy (double direction) {
+    public Enemy (Image image, int moveListid, double moveScale, int collisionId) {
+        super(image, moveListid, moveScale, collisionId);
         width = ENEMY_WIDTH;
         height = ENEMY_HEIGHT;
-        collisionId = 1;
         hp = 1;
-        me = new ImageView(enemy);
-        moveTo(rand.nextInt(SCREEN_WIDTH), 50);
-        me.setRotate(direction);
+        gun=new Factory<>(this);
+        //hangar=new Factory<Enemy,Enemy>(this);
         radius=me.getBoundsInLocal().getHeight()/2;
-        //moveTo (W/2, H/2);
     }
-
-//    public void auto () {
-//        autoMove();
-//        autoShoot();
-//    }
-
+    public Enemy addBullet(Bullet x,int del){
+        gun.add(x,del);
+        return this;
+    }
+    public Enemy addBullet(Factory<? extends Ship,Bullet> x){
+        for(int i=0;i<x.ammo.size();i++){
+            gun.ammo.add(x.ammo.get(i));
+            gun.timer.add(x.timer.get(i));
+            gun.fireDelay.add(x.fireDelay.get(i));
+        }
+        return this;
+    }
+    public Enemy copy(){
+        return new Enemy(this.me.getImage(),this.mvListId,this.mvScale,this.collisionId).addBullet(this.gun);
+    }
     public void autoMove () {
-        move(ENEMY_DX, ENEMY_DY,0);
+        this.move();
     }
 
     public void autoShoot() {
-        shoot(this, 0, 1, bullet, this.collisionId);
+        gun.shoot();
+        //hangar.shoot(); TO BE ADDED IN CASE WE WANT IT, alongside addShip in both variants and alternative shoot in factory that adds to enemy list
     }
 
 }

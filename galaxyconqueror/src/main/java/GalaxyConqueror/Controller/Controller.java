@@ -1,38 +1,25 @@
 package GalaxyConqueror.Controller;
 
-import GalaxyConqueror.Model.Bullet;
-import GalaxyConqueror.Model.Ships.Enemy;
-import GalaxyConqueror.Model.Ships.Player;
+import GalaxyConqueror.Model.Model;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static GalaxyConqueror.Controller.ActionControl.*;
-
-
-import static GalaxyConqueror.Controller.Shoot.shoot;
 import static GalaxyConqueror.Model.Constants.*;
 import static GalaxyConqueror.Model.Engine.engine;
-import static GalaxyConqueror.View.View.*;
 import static GalaxyConqueror.Model.Model.*;
 
 public class Controller {
@@ -45,16 +32,20 @@ public class Controller {
         }
         try {
             if(l==null)
-                throw new NullPointerException("Scanner imput missing");
+                throw new NullPointerException("Scanner input missing");
             while (l.hasNext()) {
                 String line = l.nextLine();
                 String[] move = line.split(";");
-                ArrayList<Pair<Double, Double>> Array = new ArrayList<>();
+                ArrayList<Model.moveVal> Array = new ArrayList<>();
                 for (String cords : move) {
                     String[] xy = cords.split(",");
-                    Array.add(new Pair<>(Double.parseDouble(xy[0]), Double.parseDouble(xy[1])));
+                    Array.add(new Model.moveVal(Double.parseDouble(xy[0]), Double.parseDouble(xy[1]),Double.parseDouble(xy[2])));
                 }
-                moveList.add(Array);
+                try {
+                    moveList.add(Array);
+                }catch (Exception e){
+                    System.out.println(e+" lmao ");
+                }
             }
         }catch (Exception e){
             System.out.println(e+"error on moveList.txt");

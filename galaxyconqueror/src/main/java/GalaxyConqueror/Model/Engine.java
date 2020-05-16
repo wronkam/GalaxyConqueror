@@ -5,17 +5,18 @@ import GalaxyConqueror.Model.Ships.Enemy;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static GalaxyConqueror.Controller.ActionControl.*;
-import static GalaxyConqueror.Controller.Shoot.shoot;
 import static GalaxyConqueror.Model.Constants.*;
 import static GalaxyConqueror.Model.Model.*;
-import static GalaxyConqueror.View.View.greenbullet;
+import static GalaxyConqueror.View.View.bullet;
+import static GalaxyConqueror.View.View.enemy;
 
 public class Engine {
     private static long enemySpawnLast = 0;
     private static long bulletDelayLast = 0;
-
+    private static Random random=new Random();
     public static void engine() {
         scoreLabel.setText("Score: " + score);
         hpLabel.setText("HP: " + player.hp);
@@ -52,8 +53,9 @@ public class Engine {
     }
 
     private static void moveBullets() {
-        for (Bullet b : bullets)
-            b.move(5);
+        for (Bullet b : bullets) {
+            b.move();
+        }
     }
 
     private static void moveEnemies() {
@@ -64,8 +66,7 @@ public class Engine {
 
     private static void shootPlayer () {
         if (player.isShooting) {
-            shoot(player, Math.cos(Math.toRadians(player.me.getRotate())), Math.sin(Math.toRadians(player.me.getRotate())), greenbullet, player.collisionId);
-            System.out.println(player.me.getRotate());
+            player.shoot();
         }
     }
 
@@ -74,10 +75,10 @@ public class Engine {
         for (Enemy enemy : enemies) {
             enemy.autoShoot();
         }
-
-        Enemy e = new Enemy(90);
+        Enemy e = new Enemy(enemy, 0, 0.5, 1);
+        e.addBullet(new Bullet(bullet,0,e.mvScale*2,1),2);
+        e.setPosition(random.nextInt((int) (SCREEN_WIDTH-e.me.getBoundsInLocal().getWidth())),50,90);
         enemies.add(e);
-        root.getChildren().add(e.me);
     }
     //usuwa enemiesy, które nie żyją
     private static void reactToCollisions () {
@@ -103,7 +104,7 @@ public class Engine {
 
     private static void checkCollisions () {
         for (Bullet b : bullets) {
-            //pociski Playera
+            //allied objects
             if (b.collisionId == 0) {
                 for (Enemy e : enemies) {
                     if (b.me.getBoundsInParent().intersects(e.me.getBoundsInParent())) {
@@ -112,7 +113,7 @@ public class Engine {
                     }
                 }
             }
-            //pociski enemiesów
+            //enemy objects
             if (b.collisionId == 1) {
                 if (b.me.getBoundsInParent().intersects(player.me.getBoundsInParent()) ) {
                     player.subtractHp(b.getDmg());
