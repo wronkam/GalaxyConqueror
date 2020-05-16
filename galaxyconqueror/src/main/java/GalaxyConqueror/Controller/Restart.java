@@ -9,6 +9,7 @@ import static GalaxyConqueror.Model.Model.bullets;
 public class Restart {
     public static void reset(){
         player.moveTo(SCREEN_WIDTH / 2, 970);
+        player.me.setRotate(-90);
         player.hp = 10;
         score = 0;
         for(int i = enemies.size()-1; i >= 0; i--) {
