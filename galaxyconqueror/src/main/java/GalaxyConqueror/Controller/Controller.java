@@ -88,16 +88,15 @@ public class Controller {
                             VBox ShowScore = new VBox();
                             Label result = new Label();
                             result.setText("Your score: " + score);
-                            result.setStyle("-fx-text-fill: #00ff00; -fx-font-size: 80; -fx-font-weight: bold; -fx-background-color: transparent;");
-                            ShowScore.setPadding(new Insets(400,0 , 0, 640));
+                            ShowScore.setPadding(new Insets(400,0 , 0, 620));
                             ShowScore.setSpacing(40);
                             ShowScore.getChildren().add(result);
-                            Button ExitGame = new Button();
                             int right = 0;
                             while(score >= 10){
                                 right++;
                                 score = score / 10;
                             }
+                            Button ExitGame = new Button();
                             ExitGame.setPrefSize(590 + right * 50, 100);
                             ExitGame.setText("Exit");
                             ExitGame.setOnAction(value ->
@@ -105,9 +104,40 @@ public class Controller {
                                 Menu.start(stage);
                                 root.getChildren().remove(ShowScore);
                             });
-                            ExitGame.setStyle("-fx-border-color: #ffffff; -fx-border-width:3px; -fx-background-color: transparent; -fx-text-fill: #00ff00; -fx-font-size: 15; -fx-font-size: 35; -fx-border-color: #00ff00 ");
                             ShowScore.getChildren().add(ExitGame);
                             root.getChildren().add(ShowScore);
+                            try
+                            {
+                                AnimationTimer timer = new AnimationTimer() {
+                                    @Override
+                                    public void handle(long now) {
+                                            if (ExitGame.isHover()) {
+                                                ExitGame.setStyle("-fx-border-color: #00ff00;" +
+                                                        "-fx-border-width:3px;" +
+                                                        "-fx-background-color: transparent;" +
+                                                        "-fx-font-weight: bold;" +
+                                                        "-fx-text-fill: #00ff00; -fx-font-size: 40");
+                                                result.setStyle("-fx-text-fill: #00ff00;" +
+                                                        "-fx-font-size: 80;" +
+                                                        "-fx-font-weight: bold;" +
+                                                        "-fx-background-color: transparent;");
+                                            } else {
+                                                ExitGame.setStyle("-fx-border-color: #ffffff;" +
+                                                        "-fx-border-width:3px;" +
+                                                        "-fx-background-color: transparent;" +
+                                                        "-fx-font-weight: bold;" +
+                                                        "-fx-text-fill: #ffffff;" + "-fx-font-size: 40");
+                                                result.setStyle("-fx-text-fill: #ffffff;" +
+                                                        "-fx-font-size: 80;" +
+                                                        "-fx-font-weight: bold;" +
+                                                        "-fx-background-color: transparent;");
+                                            }
+                                    }
+                                };
+                                timer.start();
+                            }catch(Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                         else {
                             engine();
