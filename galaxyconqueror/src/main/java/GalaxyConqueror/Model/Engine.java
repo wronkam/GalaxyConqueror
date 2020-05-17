@@ -44,6 +44,7 @@ public class Engine {
         moveBullets();
         movePlayer();
         Garbage.clean();
+        player.me.toFront();
 
     }
 
