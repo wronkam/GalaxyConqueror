@@ -20,7 +20,7 @@ public class Constants {
 
     //wymiary planszy
     public static  final int SCREEN_WIDTH = 1920;
-    public static  final int SCREEN_HEIGHT = 1080;
+    public static  final int SCREEN_HEIGHT = 1020;
 
     //wymiary obiektów
     public static final double PLAYER_WIDTH = 130;

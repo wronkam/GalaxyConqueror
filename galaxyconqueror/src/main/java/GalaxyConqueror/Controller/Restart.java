@@ -1,5 +1,6 @@
 package GalaxyConqueror.Controller;
 
+import static GalaxyConqueror.Model.Constants.SCREEN_HEIGHT;
 import static GalaxyConqueror.Model.Constants.SCREEN_WIDTH;
 import static GalaxyConqueror.Model.Model.*;
 import static GalaxyConqueror.Model.Model.bullets;
@@ -8,7 +9,7 @@ import static GalaxyConqueror.Model.Model.bullets;
 
 public class Restart {
     public static void reset(){
-        player.moveTo(SCREEN_WIDTH / 2, 970);
+        player.moveTo((double) SCREEN_WIDTH / 2, (SCREEN_HEIGHT*5/6));
         player.me.setRotate(-90);
         player.hp = 10;
         score = 0;
