@@ -175,7 +175,7 @@ public class Engine {
         Enemy E1Spawn= new Enemy(dot,0,1,2,true);
         Enemy e = new Enemy(enemy, 0, 0.5, 1);
         e.setModifier(Modifiers.healthIncrease,5,10);
-        e.addBullet(new Bullet(bullet,0,e.mvScale*2,1),2);
+        e.addBullet(new Bullet(bullet,0,e.mvScale*2,1),2,1);
         E1Spawn.addBullet(e,3,2);
         Spawn.addBullet(E1Spawn,16,15);
         enemies.add(Spawn);
