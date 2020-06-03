@@ -77,6 +77,7 @@ public class Factory{
         for (int i=0;i<ammo.size();i++) {
             if(timerA.get(i)==0) {
                 Bullet bullet =  ammo.get(i).copy();
+                ammo.get(i).modify();
                 bullet.setPosition(
                         shooter.me.getLayoutX() + shooter.me.getBoundsInLocal().getWidth() / 2
                                 + (shooter.radius + bullet.me.getBoundsInLocal().getWidth() / 2)
@@ -92,6 +93,7 @@ public class Factory{
         }
         for (int i=0;i<ships.size();i++) {
             if(timerS.get(i)==0) {
+                ships.get(i).modify();
                 Enemy bullet =  ships.get(i).copy();
                 bullet.setPosition(
                         shooter.me.getLayoutX() + shooter.me.getBoundsInLocal().getWidth() / 2

@@ -1,6 +1,7 @@
 package GalaxyConqueror.Model;
 
 import GalaxyConqueror.Controller.Garbage;
+import GalaxyConqueror.Controller.Modifiers;
 import GalaxyConqueror.Model.Ships.Enemy;
 import javafx.geometry.Bounds;
 import javafx.scene.image.ImageView;
@@ -12,7 +13,8 @@ import static GalaxyConqueror.Controller.ActionControl.*;
 import static GalaxyConqueror.Model.Constants.*;
 import static GalaxyConqueror.Model.Model.*;
 import static GalaxyConqueror.View.View.*;
-import static java.lang.Math.*;
+import static java.lang.Math.abs;
+import static java.lang.Math.min;
 
 public class Engine {
     private static long enemySpawnLast = 0;
@@ -81,7 +83,7 @@ public class Engine {
     //na ten moment enemiesy się respią w tym samym czasie co strzelają
     private static void shootAndSpawnEnemies () {
         int quEnamies=enemies.size();
-        //size of enemies can change during shooting!!!
+        //number of enemies can change during shooting!!!
         for (int i=0;i<quEnamies;) {
             enemies.get(i).autoShoot();
             i++;
@@ -121,11 +123,14 @@ public class Engine {
                         }
                     }
                 }
-            }
-            //enemy objects 1
-            if (b.collisionId == 1) {
+                //enemy objects 1
+            }else if (b.collisionId == 1) {
                 if (b.me.getBoundsInParent().intersects(player.me.getBoundsInParent()) ) {
                     player.subtractHp(b.getDmg());
+                    b.kill();
+                }
+            }else if(b.collisionId==3){
+                if (b.me.getBoundsInParent().intersects(player.me.getBoundsInParent()) ) {
                     b.kill();
                 }
             }
@@ -140,6 +145,11 @@ public class Engine {
                         (y + 10 >= enemyBounds.getMinY() && y - 10 <= enemyBounds.getMaxY())){
                             player.kill();
                 }
+            }else if(e.collisionId==3){
+                if (e.me.getBoundsInParent().intersects(player.me.getBoundsInParent()) ) {
+                    e.kill();
+                }
+
             }
         }
     }
@@ -164,6 +174,7 @@ public class Engine {
         Spawn.setPosition((double)SCREEN_WIDTH/2,-20,90);
         Enemy E1Spawn= new Enemy(dot,0,1,2,true);
         Enemy e = new Enemy(enemy, 0, 0.5, 1);
+        e.setModifier(Modifiers.healthIncrease,5,10);
         e.addBullet(new Bullet(bullet,0,e.mvScale*2,1),2);
         E1Spawn.addBullet(e,3,2);
         Spawn.addBullet(E1Spawn,16,15);

@@ -1,8 +1,10 @@
 package GalaxyConqueror.Model;
 
+import GalaxyConqueror.Controller.Modifier;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import static GalaxyConqueror.Model.Constants.DIFFICULTY;
 import static GalaxyConqueror.Model.Constants.SCREEN_WIDTH;
 import static GalaxyConqueror.Model.Engine.random;
 import static GalaxyConqueror.Model.Model.root;
@@ -22,6 +24,12 @@ public class Bullet {
     public double mvScale;
     public int hp;
     public int dmg;
+    public int copied=0;
+    public int ModCoolDown=DIFFICULTY;
+    public int ModTimer=1;
+    public Modifier Mod=null;
+    public Modifier DeathMod=null;
+
     public boolean randomSlideMovement=false;
 
     public double getX () {
@@ -61,15 +69,28 @@ public class Bullet {
         hp = 1;
     }
     public Bullet (Image image,int moveListid,double moveScale,int collisionId,boolean randomSlideMovement) {
-        this.mvListIter=0;
-        this.mvListId=moveListid;
-        this.me=new ImageView(image);
-        this.mvScale=moveScale;
-        this.collisionId=collisionId;
+        this(image,moveListid,moveScale,collisionId);
         this.randomSlideMovement=randomSlideMovement;
-        radius=image.getHeight()/2;
-        dmg = 1;
-        hp = 1;
+    }
+    public void setModifier(Modifier Mod,int ModTimer,int ModCoolDown) {
+        this.ModTimer=ModTimer;
+        this.ModCoolDown=ModCoolDown;
+        this.Mod=Mod;
+    }
+    public void setDeathModifier(Modifier DeathMod){
+        this.DeathMod=DeathMod;
+    }
+    public void setModifier(Modifier Mod,int ModTimer,int ModCoolDown,Modifier DeathMod) {
+        this.setModifier(Mod,ModTimer,ModCoolDown);
+        this.setDeathModifier(DeathMod);
+    }
+    public void modify() {
+        if(Mod!=null) {
+            ModTimer=(ModTimer+1)%ModCoolDown;
+            if(ModTimer==0) {
+                Mod.update(this);
+            }
+        }
     }
     public void setPosition(double x, double y, double direction){
         this.x=x;
@@ -79,7 +100,14 @@ public class Bullet {
         root.getChildren().add(this.me);
     }
     Bullet copy(){
-        return new Bullet(me.getImage(),mvListId,mvScale,collisionId,randomSlideMovement);
+        Bullet x= new Bullet(me.getImage(),mvListId,mvScale,collisionId,randomSlideMovement);
+        x.hp=this.hp;
+        x.dmg=this.dmg;
+        x.ModTimer=this.ModTimer;
+        x.ModCoolDown=this.ModCoolDown;
+        x.Mod=this.Mod;
+        x.DeathMod=this.DeathMod;
+        return x;
     }
     public void move (double c) {
         x += c*dirx;

@@ -7,6 +7,8 @@ import javafx.scene.image.ImageView;
 import static GalaxyConqueror.Model.Constants.*;
 import static GalaxyConqueror.View.View.greenbullet;
 import static GalaxyConqueror.View.View.spaceship;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 public class Player extends Ship {
 
@@ -47,9 +49,11 @@ public class Player extends Ship {
         double x = cx + me.getLayoutX() + dx;
         double y = cy + me.getLayoutY() + dy;
         me.setRotate(me.getRotate()+rotate);
-        if(x-me.getBoundsInLocal().getWidth()/2>0 && x+me.getBoundsInLocal().getWidth()/2<SCREEN_WIDTH
-                && y-me.getBoundsInLocal().getHeight()/2>0 && y+me.getBoundsInLocal().getHeight()/2<SCREEN_HEIGHT)
-            moveTo(x,y);
+        x=max(x,me.getBoundsInLocal().getWidth()/2+1);
+        x=min(x,SCREEN_WIDTH-me.getBoundsInLocal().getWidth()/2-1);
+        y=max(y,me.getBoundsInLocal().getHeight()/2+1);
+        y=min(y,SCREEN_HEIGHT-me.getBoundsInLocal().getHeight()/2-1);
+        moveTo(x,y);
     }
 
     public void moveTo(double x, double y)

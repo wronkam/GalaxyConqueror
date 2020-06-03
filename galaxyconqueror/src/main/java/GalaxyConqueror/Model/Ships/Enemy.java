@@ -8,15 +8,7 @@ import static GalaxyConqueror.Model.Constants.ENEMY_HEIGHT;
 import static GalaxyConqueror.Model.Constants.ENEMY_WIDTH;
 
 public class Enemy extends Ship {
-    public int scoreForDeath = 10;
-    public Enemy (Image image, int moveListid, double moveScale, int collisionId) {
-        super(image, moveListid, moveScale, collisionId);
-        width = ENEMY_WIDTH;
-        height = ENEMY_HEIGHT;
-        hp = 1;
-        gun=new Factory(this);
-        radius=me.getBoundsInLocal().getHeight()/2;
-    }
+    public int scoreForDeath ;
     public Enemy (Image image, int moveListid, double moveScale, int collisionId,boolean randomSlideMovement) {
         super(image, moveListid, moveScale, collisionId,randomSlideMovement);
         width = ENEMY_WIDTH;
@@ -24,6 +16,9 @@ public class Enemy extends Ship {
         hp = 1;
         gun=new Factory(this);
         radius=me.getBoundsInLocal().getHeight()/2;
+    }
+    public Enemy (Image image, int moveListid, double moveScale, int collisionId) {
+        this(image, moveListid, moveScale, collisionId,false);
     }
     public Enemy addBullet(Bullet x,int del){
         gun.add(x,del);
@@ -46,7 +41,23 @@ public class Enemy extends Ship {
         return this;
     }
     public Enemy copy(){
-        return new Enemy(this.me.getImage(),this.mvListId,this.mvScale,this.collisionId,this.randomSlideMovement).addBullet(this.gun);
+        Enemy x= new Enemy(this.me.getImage(),this.mvListId,this.mvScale,this.collisionId,this.randomSlideMovement).addBullet(this.gun);
+        x.hp=this.hp;
+        x.dmg=this.dmg;
+        x.ModTimer=this.ModTimer;
+        x.ModCoolDown=this.ModCoolDown;
+        x.Mod=this.Mod;
+        x.DeathMod=this.DeathMod;
+        x.scoreForDeath=x.hp*10;
+        return x;
+    }
+    public void modify() {
+        if(Mod!=null) {
+            ModTimer=(ModTimer+1)%ModCoolDown;
+            if(ModTimer==0) {
+                Mod.update(this);
+            }
+        }
     }
     public void autoMove () {
         this.move();

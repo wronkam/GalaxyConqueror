@@ -6,7 +6,8 @@ public class Constants {
 
     //ile trwa jeden frame
     public static final double TICK = 100000;
-
+    //określa bazową częstotliwość mutacji obiektów
+    public static final int DIFFICULTY=2;
     //o ile się poruszają obiekty
     public static final double PLAYER_DX = 4;
     public static final double PLAYER_DY = 4;
@@ -29,9 +30,6 @@ public class Constants {
     public static final double ENEMY_HEIGHT = 110;
     public static final double BULLET_WIDTH = 40;
     public static final double BULLET_HEIGHT = 50;
-
-
-
-
+    //jakieś modifiery
 
 }
