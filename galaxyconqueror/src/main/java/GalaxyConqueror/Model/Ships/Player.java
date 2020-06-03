@@ -20,7 +20,7 @@ public class Player extends Ship {
         moveTo((double) SCREEN_WIDTH / 2, 970);
         me.setRotate(-90);
         radius=me.getBoundsInLocal().getHeight()/2;
-        gun=new Factory<>(this);
+        gun=new Factory(this);
         gun.add(new Bullet(greenbullet,0,1,0),1);
         gun.add(new Bullet(greenbullet,2,1,0),3);
         gun.add(new Bullet(greenbullet,3,1,0),3);

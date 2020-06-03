@@ -17,8 +17,8 @@ import static java.lang.Math.*;
 public class Engine {
     private static long enemySpawnLast = 0;
     private static long bulletDelayLast = 0;
-    private static Random random=new Random();
-    private static int starShooters=0;
+    public static Random random=new Random();
+    private static boolean initiate=false;
     public static void engine() {
         scoreLabel.setText("Score: " + score);
         hpLabel.setText("HP: " + player.hp);
@@ -33,9 +33,10 @@ public class Engine {
             shootAndSpawnEnemies();
             enemySpawnLast = timeNow;
         }
-        if(starShooters==0){
-            starShooters=random.nextInt(5)+5;
-            addStars(starShooters);
+        if(!initiate){
+            initiate=true;
+            addStars(random.nextInt(5)+5);
+            initialEnemiesMaker();
         }
 
         checkCollisions();
@@ -79,13 +80,12 @@ public class Engine {
 
     //na ten moment enemiesy się respią w tym samym czasie co strzelają
     private static void shootAndSpawnEnemies () {
-        for (Enemy enemy : enemies) {
-            enemy.autoShoot();
+        int quEnamies=enemies.size();
+        //size of enemies can change during shooting!!!
+        for (int i=0;i<quEnamies;) {
+            enemies.get(i).autoShoot();
+            i++;
         }
-        Enemy e = new Enemy(enemy, 0, 0.5, 1);
-        e.addBullet(new Bullet(bullet,0,e.mvScale*2,1),2);
-        e.setPosition(random.nextInt((int) (SCREEN_WIDTH-e.me.getBoundsInLocal().getWidth())),50,90);
-        enemies.add(e);
     }
     //usuwa enemiesy, które nie żyją
     private static void reactToCollisions () {
@@ -151,27 +151,23 @@ public class Engine {
     public static void addStars(int x){
         Bullet starB=new Bullet(star,0,min(abs((random.nextDouble())+0.1),0.4),2);
         for(int i=0;i<x;i++) {
-            Enemy starShooter = new Enemy(dot, 0, 1, 2) {
-                @Override
-                public void move() {
-                    double moveX=random.nextInt(50);
-                    if(x-moveX<0)
-                        x+=moveX;
-                    else if(x+moveX>SCREEN_WIDTH)
-                        x-=moveX;
-                    else{
-                        if(random.nextBoolean())
-                            x+=moveX;
-                        else
-                            x-=moveX;
-                    }
-                    me.relocate(x,y);
-                }
-            };
-            starShooter.addBullet(starB,random.nextInt(20)+2,random.nextInt(10)+3);
-            starShooter.setPosition(random.nextInt(SCREEN_WIDTH),0,90);
+            Enemy starShooter = new Enemy(dot, 0, 1, 2, true);
+            starShooter.addBullet(starB, random.nextInt(20) + 2, random.nextInt(10) + 3);
+            starShooter.setPosition(random.nextInt(SCREEN_WIDTH), -20, 90);
             enemies.add(starShooter);
         }
+    }
+    public static void initialEnemiesMaker(){
+        //reminder: del is a pause between consecutive instances of fire, tim sets initial state of fire
+        // setting del=5 and tim=4 will result in bullets being fired 1,6,11,16,... game ticks after creation of ship
+        Enemy Spawn= new Enemy(dot,0,1,2,true);
+        Spawn.setPosition((double)SCREEN_WIDTH/2,-20,90);
+        Enemy E1Spawn= new Enemy(dot,0,1,2,true);
+        Enemy e = new Enemy(enemy, 0, 0.5, 1);
+        e.addBullet(new Bullet(bullet,0,e.mvScale*2,1),2);
+        E1Spawn.addBullet(e,3,2);
+        Spawn.addBullet(E1Spawn,16,15);
+        enemies.add(Spawn);
     }
 
 }

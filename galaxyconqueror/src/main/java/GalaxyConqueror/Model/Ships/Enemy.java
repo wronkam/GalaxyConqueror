@@ -14,11 +14,22 @@ public class Enemy extends Ship {
         width = ENEMY_WIDTH;
         height = ENEMY_HEIGHT;
         hp = 1;
-        gun=new Factory<>(this);
-        //hangar=new Factory<Enemy,Enemy>(this);
+        gun=new Factory(this);
+        radius=me.getBoundsInLocal().getHeight()/2;
+    }
+    public Enemy (Image image, int moveListid, double moveScale, int collisionId,boolean randomSlideMovement) {
+        super(image, moveListid, moveScale, collisionId,randomSlideMovement);
+        width = ENEMY_WIDTH;
+        height = ENEMY_HEIGHT;
+        hp = 1;
+        gun=new Factory(this);
         radius=me.getBoundsInLocal().getHeight()/2;
     }
     public Enemy addBullet(Bullet x,int del){
+        gun.add(x,del);
+        return this;
+    }
+    public Enemy addBullet(Enemy x,int del){
         gun.add(x,del);
         return this;
     }
@@ -26,16 +37,16 @@ public class Enemy extends Ship {
         gun.add(x,del,tim);
         return this;
     }
-    public Enemy addBullet(Factory<? extends Ship,Bullet> x){
-        for(int i=0;i<x.ammo.size();i++){
-            gun.ammo.add(x.ammo.get(i));
-            gun.timer.add(x.timer.get(i));
-            gun.fireDelay.add(x.fireDelay.get(i));
-        }
+    public Enemy addBullet(Enemy x,int del,int tim){
+        gun.add(x,del,tim);
+        return this;
+    }
+    public Enemy addBullet(Factory x){
+        gun.add(x);
         return this;
     }
     public Enemy copy(){
-        return new Enemy(this.me.getImage(),this.mvListId,this.mvScale,this.collisionId).addBullet(this.gun);
+        return new Enemy(this.me.getImage(),this.mvListId,this.mvScale,this.collisionId,this.randomSlideMovement).addBullet(this.gun);
     }
     public void autoMove () {
         this.move();
