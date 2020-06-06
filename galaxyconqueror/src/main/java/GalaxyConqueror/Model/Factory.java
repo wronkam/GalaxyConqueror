@@ -81,11 +81,11 @@ public class Factory{
                 bullet.setPosition(
                         shooter.me.getLayoutX() + shooter.me.getBoundsInLocal().getWidth() / 2
                                 + (shooter.radius + bullet.me.getBoundsInLocal().getWidth() / 2)
-                                * cos(Math.toRadians(shooter.me.getRotate())) - bullet.me.getBoundsInLocal().getWidth() / 2,
+                                * cos(Math.toRadians(shooter.me.getRotate()+bullet.rotateOffSet)) - bullet.me.getBoundsInLocal().getWidth() / 2,
                         shooter.me.getLayoutY() + shooter.me.getBoundsInLocal().getHeight() / 2
                                 + (shooter.radius + bullet.me.getBoundsInLocal().getHeight() / 2)
-                                * sin(Math.toRadians(shooter.me.getRotate())) - bullet.me.getBoundsInLocal().getHeight() / 2,
-                        shooter.me.getRotate()
+                                * sin(Math.toRadians(shooter.me.getRotate()+bullet.rotateOffSet)) - bullet.me.getBoundsInLocal().getHeight() / 2,
+                        shooter.me.getRotate()+bullet.rotateOffSet
                 );
                     bullets.add(bullet);
             }
@@ -98,11 +98,11 @@ public class Factory{
                 bullet.setPosition(
                         shooter.me.getLayoutX() + shooter.me.getBoundsInLocal().getWidth() / 2
                                 + (shooter.radius + bullet.me.getBoundsInLocal().getWidth() / 2)
-                                * cos(Math.toRadians(shooter.me.getRotate())) - bullet.me.getBoundsInLocal().getWidth() / 2,
+                                * cos(Math.toRadians(shooter.me.getRotate()+bullet.rotateOffSet)) - bullet.me.getBoundsInLocal().getWidth() / 2,
                         shooter.me.getLayoutY() + shooter.me.getBoundsInLocal().getHeight() / 2
                                 + (shooter.radius + bullet.me.getBoundsInLocal().getHeight() / 2)
-                                * sin(Math.toRadians(shooter.me.getRotate())) - bullet.me.getBoundsInLocal().getHeight() / 2,
-                        shooter.me.getRotate()
+                                * sin(Math.toRadians(shooter.me.getRotate()+bullet.rotateOffSet)) - bullet.me.getBoundsInLocal().getHeight() / 2,
+                        shooter.me.getRotate()+bullet.rotateOffSet
                 );
                 enemies.add(bullet);
             }

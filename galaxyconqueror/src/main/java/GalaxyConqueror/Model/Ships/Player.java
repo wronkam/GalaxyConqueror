@@ -4,6 +4,8 @@ import GalaxyConqueror.Model.Bullet;
 import GalaxyConqueror.Model.Factory;
 import javafx.scene.image.ImageView;
 
+import static GalaxyConqueror.Controller.Modifiers.leftTwister5;
+import static GalaxyConqueror.Controller.Modifiers.rightTwister5;
 import static GalaxyConqueror.Model.Constants.*;
 import static GalaxyConqueror.View.View.greenbullet;
 import static GalaxyConqueror.View.View.spaceship;
@@ -24,8 +26,8 @@ public class Player extends Ship {
         radius=me.getBoundsInLocal().getHeight()/2;
         gun=new Factory(this);
         gun.add(new Bullet(greenbullet,0,1,0),1);
-        gun.add(new Bullet(greenbullet,2,1,0),3);
-        gun.add(new Bullet(greenbullet,3,1,0),3);
+        gun.add(new Bullet(greenbullet,0,1,0).setModifier(rightTwister5,0,1),3);
+        gun.add(new Bullet(greenbullet,0,1,0).setModifier(leftTwister5,0,1),3);
     }
     /*
     public void move(double x, double y,double rot)

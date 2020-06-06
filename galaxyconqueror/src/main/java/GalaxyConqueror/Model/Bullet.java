@@ -27,6 +27,7 @@ public class Bullet {
     public int copied=0;
     public int ModCoolDown=DIFFICULTY;
     public int ModTimer=1;
+    public int rotateOffSet=0;
     public Modifier Mod=null;
     public Modifier DeathMod=null;
 
@@ -72,17 +73,18 @@ public class Bullet {
         this(image,moveListid,moveScale,collisionId);
         this.randomSlideMovement=randomSlideMovement;
     }
-    public void setModifier(Modifier Mod,int ModTimer,int ModCoolDown) {
+    public Bullet setModifier(Modifier Mod,int ModTimer,int ModCoolDown) {
         this.ModTimer=ModTimer;
         this.ModCoolDown=ModCoolDown;
         this.Mod=Mod;
+        return this;
     }
-    public void setDeathModifier(Modifier DeathMod){
+    public Bullet setDeathModifier(Modifier DeathMod){
         this.DeathMod=DeathMod;
+        return this;
     }
-    public void setModifier(Modifier Mod,int ModTimer,int ModCoolDown,Modifier DeathMod) {
-        this.setModifier(Mod,ModTimer,ModCoolDown);
-        this.setDeathModifier(DeathMod);
+    public Bullet setModifier(Modifier Mod,int ModTimer,int ModCoolDown,Modifier DeathMod) {
+        return this.setModifier(Mod,ModTimer,ModCoolDown).setDeathModifier(DeathMod);
     }
     public void modify() {
         if(Mod!=null) {
@@ -107,6 +109,7 @@ public class Bullet {
         x.ModCoolDown=this.ModCoolDown;
         x.Mod=this.Mod;
         x.DeathMod=this.DeathMod;
+        x.rotateOffSet=rotateOffSet;
         return x;
     }
     public void move (double c) {

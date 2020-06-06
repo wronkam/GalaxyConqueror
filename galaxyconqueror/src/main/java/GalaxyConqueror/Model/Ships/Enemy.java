@@ -49,6 +49,7 @@ public class Enemy extends Ship {
         x.Mod=this.Mod;
         x.DeathMod=this.DeathMod;
         x.scoreForDeath=x.hp*10;
+        x.rotateOffSet=rotateOffSet;
         return x;
     }
     public void modify() {

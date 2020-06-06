@@ -1,7 +1,6 @@
 package GalaxyConqueror.Model;
 
 import GalaxyConqueror.Controller.Garbage;
-import GalaxyConqueror.Controller.Modifiers;
 import GalaxyConqueror.Model.Ships.Enemy;
 import javafx.geometry.Bounds;
 import javafx.scene.image.ImageView;
@@ -10,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import static GalaxyConqueror.Controller.ActionControl.*;
+import static GalaxyConqueror.Controller.Modifiers.healthIncreaseTo5;
 import static GalaxyConqueror.Model.Constants.*;
 import static GalaxyConqueror.Model.Model.*;
 import static GalaxyConqueror.View.View.*;
@@ -174,7 +174,7 @@ public class Engine {
         Spawn.setPosition((double)SCREEN_WIDTH/2,-20,90);
         Enemy E1Spawn= new Enemy(dot,0,1,2,true);
         Enemy e = new Enemy(enemy, 0, 0.5, 1);
-        e.setModifier(Modifiers.healthIncrease,5,10);
+        e.setModifier(healthIncreaseTo5,5,10);
         e.addBullet(new Bullet(bullet,0,e.mvScale*2,1),2,1);
         E1Spawn.addBullet(e,3,2);
         Spawn.addBullet(E1Spawn,16,15);
