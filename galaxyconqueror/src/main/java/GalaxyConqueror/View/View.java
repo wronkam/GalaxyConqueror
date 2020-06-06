@@ -13,4 +13,7 @@ public class View {
     public static Image menubg = new Image("file:resources/menubackground.jpg", SCREEN_WIDTH, SCREEN_HEIGHT+60, true, true);
     public static Image dot = new Image("file:resources/dot.png", 1, 1, true, true);
     public static Image star = new Image("file:resources/star.png", 20, 20, true, true);
+    public static Image htpbg = new Image("file:resources/htpbg.jpg", SCREEN_WIDTH, SCREEN_HEIGHT+60, true, true);
+    public static Image bg = new Image("file:resources/bg.jpg", SCREEN_WIDTH, SCREEN_HEIGHT+60, true, true);
+
 }

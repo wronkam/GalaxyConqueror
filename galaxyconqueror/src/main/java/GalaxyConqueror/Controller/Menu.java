@@ -28,7 +28,7 @@ public class Menu {
         ImageView bg = new ImageView(menubg);
 
         Button NewGameButton = new Button("New Game");
-        Button SettingsButton = new Button("Settings");
+        Button SettingsButton = new Button("How To Play");
         Button HsButton = new Button("Highscores");
         Button ExitButton = new Button("Exit");
 
@@ -44,8 +44,10 @@ public class Menu {
         buttons.add(ExitButton);
 
         NewGameButton.setOnAction(value -> Controller.start(stage));
-        SettingsButton.setOnAction(value -> SettingsButton.setText("Work in progress"));
-        HsButton.setOnAction(value -> HsButton.setText("Work in progress"));
+        SettingsButton.setOnAction(value ->
+                HowToPlay.start(stage));
+        HsButton.setOnAction(value ->
+                Highscores.start(stage));
         ExitButton.setOnAction(value -> {
             if(ExitButton.getText().equals("Exit")) {
                 ExitButton.setText("Are you sure?");

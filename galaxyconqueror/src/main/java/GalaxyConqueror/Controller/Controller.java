@@ -13,11 +13,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
+import static GalaxyConqueror.Controller.ReadScore.readScores;
 import static GalaxyConqueror.Model.Constants.*;
 import static GalaxyConqueror.Model.Engine.engine;
 import static GalaxyConqueror.Model.Model.*;
@@ -82,6 +83,37 @@ public class Controller {
                 public void handle(long now) {
                     if (now - last >= TICK) {
                         if(player.isDead() && temp == 0) {
+
+                            readScores();
+                            Highscores.Scores.add(String.valueOf(score));
+                            Highscores.Scores.sort((s, t1) -> {
+                                if(s.length() > t1.length())
+                                {
+                                    return -1;
+                                }
+                                else if(s.length() == t1.length())
+                                {
+                                    return t1.compareTo(s);
+                                }
+                                else
+                                {
+                                    return 1;
+                                }
+                            });
+                            Highscores.Scores.remove(8);
+                            try {
+                                PrintWriter writer = new PrintWriter("./resources/scores.txt");
+                                writer.close();
+                                BufferedWriter writer2 = new BufferedWriter(new FileWriter("./resources/scores.txt"));
+                                for(String s : Highscores.Scores)
+                                {
+                                    writer2.write(s+",");
+                                }
+                                writer2.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
                             hpLabel.setText("HP: " + 0); //no to powinno być zmienione
                             temp = 1;
                             this.stop();
@@ -108,7 +140,7 @@ public class Controller {
                             root.getChildren().add(ShowScore);
                             try
                             {
-                                AnimationTimer timer = new AnimationTimer() {
+                                AnimationTimer timer= new AnimationTimer() {
                                     @Override
                                     public void handle(long now) {
                                             if (ExitGame.isHover()) {

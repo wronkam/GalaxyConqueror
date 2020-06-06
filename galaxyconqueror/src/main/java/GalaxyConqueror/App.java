@@ -8,6 +8,7 @@ import GalaxyConqueror.Controller.Controller;
 import GalaxyConqueror.Controller.Menu;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import static GalaxyConqueror.Controller.ReadScore.readScores;
 
  /*
 TODO:
@@ -35,6 +36,7 @@ Node -> abstract Bullet -> Spaceship -> each and every enemy
 public class App extends Application {
     public static void main(String[] args) {
         launch(args);
+        readScores();
     }
 
     @Override
