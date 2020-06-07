@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static GalaxyConqueror.App.canIConfigureJavaFXMedia;
 import static GalaxyConqueror.Controller.ActionControl.*;
 import static GalaxyConqueror.Controller.Modifiers.*;
 import static GalaxyConqueror.Model.Constants.*;
@@ -93,7 +94,9 @@ public class Engine {
     //usuwa enemiesy, które nie żyją
     private static void reactToCollisions () {
         if (player.isDead()) {
-            bgPlayer.stop();
+            if(canIConfigureJavaFXMedia) {
+                bgPlayer.stop();
+            }
             gameOver();
         }
         ArrayList<ImageView> imagesToRemove = new ArrayList<>();

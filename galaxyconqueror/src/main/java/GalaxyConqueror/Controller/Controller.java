@@ -18,6 +18,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static GalaxyConqueror.App.canIConfigureJavaFXMedia;
 import static GalaxyConqueror.Controller.ReadScore.readScores;
 import static GalaxyConqueror.Model.Constants.*;
 import static GalaxyConqueror.Model.Engine.engine;
@@ -54,12 +55,14 @@ public class Controller {
         }catch (Exception e){
             System.out.println(e+"error on moveList.txt");
         }
-        bgPlayer.setOnEndOfMedia(new Runnable() {
-            public void run() {
-                bgPlayer.seek(Duration.ZERO);
-            }
-        });
-        bgPlayer.setVolume(0.15);
+        if(canIConfigureJavaFXMedia) {
+            bgPlayer.setOnEndOfMedia(new Runnable() {
+                public void run() {
+                    bgPlayer.seek(Duration.ZERO);
+                }
+            });
+            bgPlayer.setVolume(0.15);
+        }
         try {
             if(first == 0) {
                 first++;

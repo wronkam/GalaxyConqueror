@@ -6,6 +6,7 @@ import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
 
+import static GalaxyConqueror.App.canIConfigureJavaFXMedia;
 import static GalaxyConqueror.Model.Constants.*;
 
 public class View<bgM> {
@@ -25,7 +26,14 @@ public class View<bgM> {
     public static Image htpbg = new Image("file:resources/htpbg.jpg", SCREEN_WIDTH, SCREEN_HEIGHT+60, true, true);
     public static Image bg = new Image("file:resources/bg.jpg", SCREEN_WIDTH, SCREEN_HEIGHT+60, true, true);
     public static Image powerup = new Image("file:resources/powerup.png", 75, 75, true,true);
-     static File Ama=new File("resources/Amanita.mp3");
-     static Media bgM = new Media(Ama.toURI().toString());
-    public static MediaPlayer bgPlayer=new MediaPlayer(bgM);
+    static File Ama ;
+    static Media bgM ;
+    public static MediaPlayer bgPlayer ;
+    public static void set() {
+        if (canIConfigureJavaFXMedia) {
+             Ama = new File("resources/Amanita.mp3");
+             bgM = new Media(Ama.toURI().toString());
+             bgPlayer = new MediaPlayer(bgM);
+        }
+    }
 }

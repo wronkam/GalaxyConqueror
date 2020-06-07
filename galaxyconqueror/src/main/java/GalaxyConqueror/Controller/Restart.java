@@ -3,6 +3,7 @@ package GalaxyConqueror.Controller;
 import GalaxyConqueror.Model.Bullet;
 import GalaxyConqueror.Model.Engine;
 
+import static GalaxyConqueror.App.canIConfigureJavaFXMedia;
 import static GalaxyConqueror.Model.Constants.SCREEN_HEIGHT;
 import static GalaxyConqueror.Model.Constants.SCREEN_WIDTH;
 import static GalaxyConqueror.Model.Model.*;
@@ -13,7 +14,9 @@ import static GalaxyConqueror.View.View.greenbullet;
 
 public class Restart {
     public static void reset(){
-        bgPlayer.play();
+        if(canIConfigureJavaFXMedia) {
+            bgPlayer.play();
+        }
         player.moveTo((double) SCREEN_WIDTH / 2, (double) (SCREEN_HEIGHT*5)/6);
         player.me.setRotate(-90);
         player.hp = 10;

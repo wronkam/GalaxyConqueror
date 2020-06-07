@@ -4,36 +4,18 @@ package GalaxyConqueror;
 //is maven working in intellij?
 //does it work?
 
-import GalaxyConqueror.Controller.Controller;
 import GalaxyConqueror.Controller.Menu;
+import GalaxyConqueror.View.View;
 import javafx.application.Application;
 import javafx.stage.Stage;
+
 import static GalaxyConqueror.Controller.ReadScore.readScores;
-
- /*
-TODO:
--obiekty
--przemieszcznanie obiektów
--action: shoot
-*/
-/*
-Schemat:
-Node -> abstract Bullet -> Spaceship -> each and every enemy
-               |                |
-               V               > Player
-               1.??????
-               2.??????
-               3.??????
-               4.Profit
-*/
-/*
-0.shoot
-1.check colisons
-2.react to colisions
-3.move
-*/
-
 public class App extends Application {
+    //=====================================================================
+    //=====================================================================
+    public static boolean canIConfigureJavaFXMedia=true;
+    //=====================================================================
+    //=====================================================================
     public static void main(String[] args) {
         launch(args);
         readScores();
@@ -41,6 +23,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
+        View.set();
         Menu.start(stage);
     }
 }
