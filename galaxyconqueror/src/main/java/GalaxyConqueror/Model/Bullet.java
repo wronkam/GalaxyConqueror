@@ -135,9 +135,9 @@ public class Bullet {
             me.relocate(x, y);
         }else {
             double moveX=random.nextInt(50);
-            if(x-moveX<100)
+            if(x-moveX<150)
                 x+=moveX;
-            else if(x+moveX>SCREEN_WIDTH-100)
+            else if(x+moveX>SCREEN_WIDTH-150)
                 x-=moveX;
             else{
                 if(random.nextBoolean())

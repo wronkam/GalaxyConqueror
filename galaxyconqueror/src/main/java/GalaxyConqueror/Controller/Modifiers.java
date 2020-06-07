@@ -9,7 +9,8 @@ import static GalaxyConqueror.View.View.greenbullet;
 import static java.lang.Math.abs;
 
 public class Modifiers {
-    public static HealthIncrease healthIncreaseBy5=new HealthIncrease(5);
+    public static HealthIncrease healthIncreaseBy3=new HealthIncrease(3);
+    public static HealthIncrease healthIncreaseBy2=new HealthIncrease(2);
     public static HealthIncrease healthIncreaseBy20=new HealthIncrease(20);
     public static RightTwister rightTwister5=new RightTwister(5);
     public static RightTwister rightTwister10=new RightTwister(10);
@@ -21,8 +22,11 @@ public class Modifiers {
     public static HpUp hpUp3=new HpUp(3);
     public static RandomPlayerBonus randomPlayerBonus=new RandomPlayerBonus();
     public static InfHealthIncrease infHealthIncrease=new InfHealthIncrease();
-    public static LRShower lrShower5in35=new LRShower(5,35);
-    public static LRShower lrShower10in20=new LRShower(10,20);
+    public static LRShower lrShower8in30at30=new LRShower(8,20,-30);
+    public static LRShower lrShower8in30at60=new LRShower(8,20,-60);
+    public static RLShower rlShower8in30at30=new RLShower(8,20,30);
+    public static RLShower rlShower8in30at60=new RLShower(8,20,60);
+    public static LRShower lrShower10in20=new LRShower(10,20,0);
     public static SidesShooter sidesShooter=new SidesShooter();
 
 
@@ -80,29 +84,58 @@ public class Modifiers {
     static  public class LRShower implements Modifier{
         private int limit;
         private int step;
-        LRShower(int step,int limit){
+        private int baseOfSet;
+        LRShower(int step,int limit,int baseOfSet){
             this.step=step;
             this.limit=limit;
+            this.baseOfSet=baseOfSet;
         }
         @Override
         public synchronized void update(Ship x) {
             x.rotateOffSet+=step;
-            if(abs(x.rotateOffSet)>limit)
+            if(abs(x.rotateOffSet-baseOfSet)>limit)
             {
-                x.rotateOffSet=limit*(x.rotateOffSet<0 ? -1 : 1);
+                x.rotateOffSet=limit*(x.rotateOffSet<0 ? -1 : 1)+baseOfSet;
                 step*=-1;
             }
         }
         @Override
         public synchronized void update(Bullet x) {
-           x.rotateOffSet+=step;
-           if(abs(x.rotateOffSet)>limit)
-           {
-               x.rotateOffSet=limit*(x.rotateOffSet<0 ? -1 : 1);
-               step*=-1;
-           }
+            x.rotateOffSet+=step;
+            if(abs(x.rotateOffSet-baseOfSet)>limit)
+            {
+                x.rotateOffSet=limit*(x.rotateOffSet<0 ? -1 : 1)+baseOfSet;
+                step*=-1;
+            }
         }
-
+    }
+    static  public class RLShower implements Modifier{
+        private int limit;
+        private int step;
+        private int baseOfSet;
+        RLShower(int step,int limit,int baseOfSet){
+            this.step=step;
+            this.limit=limit;
+            this.baseOfSet=baseOfSet;
+        }
+        @Override
+        public synchronized void update(Ship x) {
+            x.rotateOffSet-=step;
+            if(abs(x.rotateOffSet-baseOfSet)>limit)
+            {
+                x.rotateOffSet=limit*(x.rotateOffSet<0 ? -1 : 1)+baseOfSet;
+                step*=-1;
+            }
+        }
+        @Override
+        public synchronized void update(Bullet x) {
+            x.rotateOffSet-=step;
+            if(abs(x.rotateOffSet-baseOfSet)>limit)
+            {
+                x.rotateOffSet=limit*(x.rotateOffSet<0 ? -1 : 1)+baseOfSet;
+                step*=-1;
+            }
+        }
     }
     static public class DmgUp implements Modifier{
         private int up;

@@ -185,8 +185,8 @@ public class Engine {
         Enemy E1Spawn= new Enemy(dot,0,1,2,true);
         Enemy e = new Enemy(enemy, 0, 0.5, 1);
         e.setModifier(infHealthIncrease,5,15);
-        e.addBullet(new Bullet(bullet,0,e.mvScale*2,1),2,1);
-        E1Spawn.addBullet(e,6,4);
+        e.addBullet(new Bullet(bullet,0,e.mvScale*2,1),3,1);
+        E1Spawn.addBullet(e,8,4);
         Spawn.addBullet(E1Spawn,19,18);
 
 
@@ -195,10 +195,10 @@ public class Engine {
         e2.hp=30;
         e2.setModifier(healthIncreaseBy20,0,1);
         Bullet blueBulletR=new Bullet(bluebullet,0,0.8,1);
-        blueBulletR.dmg=2;
+        blueBulletR.dmg=3;
         blueBulletR.setModifier(rightTwister10,0,1);
         Bullet blueBulletL=new Bullet(bluebullet,0,0.8,1);
-        blueBulletL.dmg=2;
+        blueBulletL.dmg=3;
         blueBulletL.setModifier(leftTwister10,0,1);
         e2.addBullet(blueBulletL,3);
         e2.addBullet(blueBulletL.copy(90),3);
@@ -213,6 +213,40 @@ public class Engine {
         E2Spawn.addBullet(e2,70,30);
         enemies.add(Spawn);
         enemies.add(E2Spawn);
+
+        //enemy3 sail
+        Enemy e3=new Enemy(enemy3,0,0.3,1);
+        e3.hp=5;
+        e3.setModifier(healthIncreaseBy3,0,3);
+        Enemy E3Spawn=new Enemy(dot,0,1,2,true);
+        Bullet redSideMoveR30=new Bullet(bullet,0,0.75,1);
+        redSideMoveR30.setModifier(lrShower8in30at30,0,1);
+        redSideMoveR30.rotateOffSet=-30;
+        Bullet redSideMoveR60=new Bullet(bullet,0,0.75,1);
+        redSideMoveR60.setModifier(lrShower8in30at60,0,1);
+        redSideMoveR60.rotateOffSet=-60;
+        Bullet redSideMoveL30=new Bullet(bullet,0,0.75,1);
+        redSideMoveL30.setModifier(rlShower8in30at30,0,1);
+        redSideMoveL30.rotateOffSet=30;
+        Bullet redSideMoveL60=new Bullet(bullet,0,0.75,1);
+        redSideMoveL60.setModifier(rlShower8in30at60,0,1);
+        redSideMoveL60.rotateOffSet=60;
+        e3.addBullet(redSideMoveR30,4);
+        e3.addBullet(redSideMoveR60,4);
+        e3.addBullet(redSideMoveL30,4);
+        e3.addBullet(redSideMoveL60,4);
+        E3Spawn.addBullet(e3,22,12);
+        Spawn.addBullet(E3Spawn,115,100);
+
+        //enemy4 normal+ speedyBoi
+        Enemy e4=new Enemy(enemy4,8,0.7,1);
+        e4.setModifier(infHealthIncrease,4,8);
+        Bullet purpleBullet=new Bullet(purplebullet,0,1,1);
+        purpleBullet.dmg=2;
+        e4.addBullet(purpleBullet.copy(-8),1);
+        e4.addBullet(purpleBullet.copy(8),1);
+        E1Spawn.addBullet(e4,17,7);
+        //shoot by e1 spawn
 
         //powerUp
         Enemy PowerDrop=new Enemy(dot,0,1,2,true);

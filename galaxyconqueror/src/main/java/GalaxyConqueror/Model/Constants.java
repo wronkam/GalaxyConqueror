@@ -25,9 +25,9 @@ public class Constants {
 
     //wymiary obiektów
     public static final double PLAYER_WIDTH = 130;
-    public static final double PLAYER_HEIGHT = 110;
+    public static final double PLAYER_HEIGHT = 130;
     public static final double ENEMY_WIDTH = 130;
-    public static final double ENEMY_HEIGHT = 110;
+    public static final double ENEMY_HEIGHT = 130;
     public static final double BULLET_WIDTH = 40;
     public static final double BULLET_HEIGHT = 50;
     //jakieś modifiery
