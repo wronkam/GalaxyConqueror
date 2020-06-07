@@ -20,6 +20,7 @@ public class Model {
     public static int score = 0;
     public static Label scoreLabel = new Label();
     public static Label hpLabel = new Label();
+    public static Label dmgLabel = new Label();
     public static Player player = new Player();
     public static ArrayList<Bullet> bullets = new ArrayList<>();
     public static ArrayList<Enemy> enemies = new ArrayList<>();

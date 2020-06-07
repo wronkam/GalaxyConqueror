@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Scanner;
 
 import static GalaxyConqueror.Controller.ReadScore.readScores;
@@ -57,13 +56,16 @@ public class Controller {
             if(first == 0) {
                 first++;
                 VBox labels = new VBox();
+                dmgLabel.setTextFill(Color.WHITE);
+                dmgLabel.setAlignment(Pos.TOP_LEFT);
+                dmgLabel.setFont(new Font(40));
                 hpLabel.setTextFill(Color.WHITE);
                 hpLabel.setAlignment(Pos.TOP_LEFT);
                 hpLabel.setFont(new Font(40));
                 scoreLabel.setTextFill(Color.WHITE);
                 scoreLabel.setAlignment(Pos.TOP_LEFT);
                 scoreLabel.setFont(new Font(40));
-                labels.getChildren().addAll(scoreLabel, hpLabel);
+                labels.getChildren().addAll(scoreLabel, hpLabel,dmgLabel);
                 stage.setTitle("Galaxy Conqueror");
                 box.getChildren().add(splashView);
                 root.getChildren().add(player.me);

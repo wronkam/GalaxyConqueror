@@ -154,6 +154,8 @@ public class Bullet {
     }
 
     public void kill () {
+        if(DeathMod!=null)
+            DeathMod.update(this);
         subtractHp(hp);
     }
 

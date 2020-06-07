@@ -15,5 +15,6 @@ public class View {
     public static Image star = new Image("file:resources/star.png", 20, 20, true, true);
     public static Image htpbg = new Image("file:resources/htpbg.jpg", SCREEN_WIDTH, SCREEN_HEIGHT+60, true, true);
     public static Image bg = new Image("file:resources/bg.jpg", SCREEN_WIDTH, SCREEN_HEIGHT+60, true, true);
+    public static Image powerup = new Image("file:resources/powerup.png", 80, 80, true, true);
 
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import static GalaxyConqueror.Controller.ActionControl.*;
-import static GalaxyConqueror.Controller.Modifiers.healthIncreaseTo5;
+import static GalaxyConqueror.Controller.Modifiers.*;
 import static GalaxyConqueror.Model.Constants.*;
 import static GalaxyConqueror.Model.Model.*;
 import static GalaxyConqueror.View.View.*;
@@ -24,6 +24,7 @@ public class Engine {
     public static void engine() {
         scoreLabel.setText("Score: " + score);
         hpLabel.setText("HP: " + player.hp);
+        dmgLabel.setText("Dmg: "+player.dmg);
         long timeNow = System.currentTimeMillis();
         long bulletDelay = timeNow - bulletDelayLast;
         long enemySpawn = timeNow - enemySpawnLast;
@@ -174,11 +175,20 @@ public class Engine {
         Spawn.setPosition((double)SCREEN_WIDTH/2,-20,90);
         Enemy E1Spawn= new Enemy(dot,0,1,2,true);
         Enemy e = new Enemy(enemy, 0, 0.5, 1);
-        e.setModifier(healthIncreaseTo5,5,10);
+        e.setModifier(infHealthIncrease,5,10);
         e.addBullet(new Bullet(bullet,0,e.mvScale*2,1),2,1);
         E1Spawn.addBullet(e,3,2);
         Spawn.addBullet(E1Spawn,16,15);
+
         enemies.add(Spawn);
+
+        Enemy PowerDrop=new Enemy(dot,0,1,2,true);
+        PowerDrop.setPosition((double) SCREEN_WIDTH/2,-40,90);
+        Bullet powerUp=new Bullet(powerup,0,0.3,3);
+        powerUp.setDeathModifier(randomPlayerBonus);
+        PowerDrop.addBullet(powerUp,30,15);
+
+        enemies.add(PowerDrop);
     }
 
 }
