@@ -130,13 +130,14 @@ public class Engine {
                     Bounds enemyBounds = b.me.localToScene(b.me.getBoundsInLocal());
                     Bounds playerBounds = player.me.localToScene(player.me.getBoundsInLocal());
                     double x = playerBounds.getMinX() + player.width / 2;
-                    double y = playerBounds.getMinY() + player.height / 2;
-                    if((x + 10 >= enemyBounds.getMinX() && x - 10 <= enemyBounds.getMaxX()) &&
-                            (y + 10 >= enemyBounds.getMinY() && y - 10 <= enemyBounds.getMaxY())){
+                    double y = playerBounds.getMinY() + player.height / 2 - 5;
+                    double x2 = enemyBounds.getMinX() + BULLET_WIDTH / 2;
+                    double y2 = enemyBounds.getMinY() + BULLET_HEIGHT / 2;
+                    if((x + 55 >= x2 && x - 55 <= x2 &&
+                            (y + 44 >= y2 && y - 44 <= y2))){
                         player.subtractHp(b.getDmg());
+                        b.kill();
                     }
-                    player.subtractHp(b.getDmg());
-                    b.kill();
                 }
             }else if(b.collisionId==3){
                 if (b.me.getBoundsInParent().intersects(player.me.getBoundsInParent()) ) {
