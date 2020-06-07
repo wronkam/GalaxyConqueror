@@ -14,6 +14,8 @@
 1. Clone the repository <code> git clone https://github.com/wronkam/GalaxyConqueror.git </code> </br>
 2. Import Project in IntelliJ IDEA using pom.xml file </br>
 3. Compile and run App.java class </br>
+## Credits:
+Music: [PunchKey "Amanita"](https://soundcloud.com/punchkey/amanita?fbclid=IwAR3a_Xxm8Tuc_n3qFiwksO4AZ1O3HrRSCCAYc-HhXSBMLkNi9HMo6n-82Wk)
 ## Authors:
 <b>Michał Wronka</b></br>
 <b>Mateusz Golonka</b></br>
