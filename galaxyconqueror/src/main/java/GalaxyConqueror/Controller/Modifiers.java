@@ -9,7 +9,7 @@ import static GalaxyConqueror.View.View.greenbullet;
 import static java.lang.Math.abs;
 
 public class Modifiers {
-    public static HealthIncrease healthIncreaseBy3=new HealthIncrease(3);
+    public static HealthIncrease healthIncreaseBy5=new HealthIncrease(5);
     public static HealthIncrease healthIncreaseBy2=new HealthIncrease(2);
     public static HealthIncrease healthIncreaseBy20=new HealthIncrease(20);
     public static RightTwister rightTwister5=new RightTwister(5);

@@ -131,7 +131,7 @@ public class Engine {
                 //enemy objects 1
             }else if (b.collisionId == 1) {
                 if (b.me.getBoundsInParent().intersects(player.me.getBoundsInParent()) ) {
-                    Bounds enemyBounds = b.me.localToScene(b.me.getBoundsInLocal());
+                  /*  Bounds enemyBounds = b.me.localToScene(b.me.getBoundsInLocal());
                     Bounds playerBounds = player.me.localToScene(player.me.getBoundsInLocal());
                     double x = playerBounds.getMinX() + PLAYER_WIDTH / 2;
                     double y = playerBounds.getMinY() + PLAYER_HEIGHT / 2;
@@ -139,9 +139,9 @@ public class Engine {
                     double y2 = enemyBounds.getMinY() + BULLET_HEIGHT / 2;
                     if((x + 55 >= x2 && x - 55 <= x2 &&
                             (y + 55 >= y2 && y - 55 <= y2))){
-                        player.subtractHp(b.getDmg());
+                    */    player.subtractHp(b.getDmg());
                         b.kill();
-                    }
+                    //}
                 }
             }else if(b.collisionId==3){
                 if (b.me.getBoundsInParent().intersects(player.me.getBoundsInParent()) ) {
@@ -222,7 +222,7 @@ public class Engine {
         //enemy3 sail
         Enemy e3=new Enemy(enemy3,0,0.3,1);
         e3.hp=5;
-        e3.setModifier(healthIncreaseBy3,0,3);
+        e3.setModifier(healthIncreaseBy5,0,3);
         Enemy E3Spawn=new Enemy(dot,0,1,2,true);
         Bullet redSideMoveR30=new Bullet(bullet,0,0.75,1);
         redSideMoveR30.setModifier(lrShower8in30at30,0,1);
@@ -259,7 +259,6 @@ public class Engine {
         Bullet powerUp=new Bullet(powerup,0,0.3,3);
         powerUp.setDeathModifier(randomPlayerBonus);
         PowerDrop.addBullet(powerUp,15,7);
-
         enemies.add(PowerDrop);
     }
 

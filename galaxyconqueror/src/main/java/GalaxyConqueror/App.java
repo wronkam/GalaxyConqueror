@@ -13,7 +13,7 @@ import static GalaxyConqueror.Controller.ReadScore.readScores;
 public class App extends Application {
     //=====================================================================
     //=====================================================================
-    public static boolean canIConfigureJavaFXMedia=false;
+    public static boolean canIConfigureJavaFXMedia=true;
     //=====================================================================
     //=====================================================================
     public static void main(String[] args) {
