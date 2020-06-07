@@ -129,12 +129,12 @@ public class Engine {
                 if (b.me.getBoundsInParent().intersects(player.me.getBoundsInParent()) ) {
                     Bounds enemyBounds = b.me.localToScene(b.me.getBoundsInLocal());
                     Bounds playerBounds = player.me.localToScene(player.me.getBoundsInLocal());
-                    double x = playerBounds.getMinX() + player.width / 2;
-                    double y = playerBounds.getMinY() + player.height / 2 - 5;
+                    double x = playerBounds.getMinX() + PLAYER_WIDTH / 2;
+                    double y = playerBounds.getMinY() + PLAYER_HEIGHT / 2;
                     double x2 = enemyBounds.getMinX() + BULLET_WIDTH / 2;
                     double y2 = enemyBounds.getMinY() + BULLET_HEIGHT / 2;
                     if((x + 55 >= x2 && x - 55 <= x2 &&
-                            (y + 44 >= y2 && y - 44 <= y2))){
+                            (y + 55 >= y2 && y - 55 <= y2))){
                         player.subtractHp(b.getDmg());
                         b.kill();
                     }
@@ -174,7 +174,7 @@ public class Engine {
             Enemy starShooter = new Enemy(dot, 0, 1, 2, true);
             starShooter.addBullet(starB, random.nextInt(20) + 2, random.nextInt(10) + 3);
             starShooter.setPosition(random.nextInt(SCREEN_WIDTH), -20, 90);
-            //enemies.add(starShooter);
+            enemies.add(starShooter);
         }
     }
     public static void initialEnemiesMaker(){
