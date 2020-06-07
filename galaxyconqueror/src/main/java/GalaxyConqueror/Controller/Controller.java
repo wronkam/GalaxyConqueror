@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import static GalaxyConqueror.Controller.ReadScore.readScores;
 import static GalaxyConqueror.Model.Constants.*;
 import static GalaxyConqueror.Model.Engine.engine;
 import static GalaxyConqueror.Model.Model.*;
+import static GalaxyConqueror.View.View.bgPlayer;
 
 public class Controller {
     static int first = 0;
@@ -52,6 +54,12 @@ public class Controller {
         }catch (Exception e){
             System.out.println(e+"error on moveList.txt");
         }
+        bgPlayer.setOnEndOfMedia(new Runnable() {
+            public void run() {
+                bgPlayer.seek(Duration.ZERO);
+            }
+        });
+        bgPlayer.setVolume(0.15);
         try {
             if(first == 0) {
                 first++;

@@ -192,9 +192,9 @@ public class Modifiers {
             int i=random.nextInt(3);
             switch (i){
                 case 0  : {
-                    player.dmg+=2;
+                    player.dmg+=1;
                     for(Bullet a:player.gun.ammo)
-                        a.dmg+=2;
+                        a.dmg+=1;
                     break;
                 }
                 case 1: {

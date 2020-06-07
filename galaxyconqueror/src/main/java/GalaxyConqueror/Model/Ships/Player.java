@@ -4,7 +4,7 @@ import GalaxyConqueror.Model.Factory;
 import javafx.scene.image.ImageView;
 
 import static GalaxyConqueror.Model.Constants.*;
-import static GalaxyConqueror.View.View.spaceship;
+import static GalaxyConqueror.View.View.*;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 

@@ -93,6 +93,7 @@ public class Engine {
     //usuwa enemiesy, które nie żyją
     private static void reactToCollisions () {
         if (player.isDead()) {
+            bgPlayer.stop();
             gameOver();
         }
         ArrayList<ImageView> imagesToRemove = new ArrayList<>();

@@ -1,10 +1,14 @@
 package GalaxyConqueror.View;
 
 import javafx.scene.image.Image;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+import java.io.File;
 
 import static GalaxyConqueror.Model.Constants.*;
 
-public class View {
+public class View<bgM> {
     public static Image spaceship = new Image("file:resources/spaceship.png", PLAYER_WIDTH, PLAYER_HEIGHT, true, true);
     public static Image background = new Image("file:resources/background.png", SCREEN_WIDTH, SCREEN_HEIGHT, false, true);
     public static Image bullet = new Image("file:resources/bullet.png",BULLET_WIDTH,BULLET_HEIGHT,true,true);
@@ -21,5 +25,7 @@ public class View {
     public static Image htpbg = new Image("file:resources/htpbg.jpg", SCREEN_WIDTH, SCREEN_HEIGHT+60, true, true);
     public static Image bg = new Image("file:resources/bg.jpg", SCREEN_WIDTH, SCREEN_HEIGHT+60, true, true);
     public static Image powerup = new Image("file:resources/powerup.png", 75, 75, true,true);
-
+     static File Ama=new File("resources/Amanita.mp3");
+     static Media bgM = new Media(Ama.toURI().toString());
+    public static MediaPlayer bgPlayer=new MediaPlayer(bgM);
 }
