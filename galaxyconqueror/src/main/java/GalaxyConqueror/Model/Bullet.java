@@ -112,6 +112,11 @@ public class Bullet {
         x.rotateOffSet=rotateOffSet;
         return x;
     }
+    public synchronized Bullet copy(int rotateAddition){
+        Bullet x=this.copy();
+        x.rotateOffSet+=rotateAddition;
+        return x;
+    }
     public synchronized void move (double c) {
         x += c*dirx;
         y += c*diry;

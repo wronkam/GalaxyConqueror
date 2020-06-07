@@ -127,6 +127,14 @@ public class Engine {
                 //enemy objects 1
             }else if (b.collisionId == 1) {
                 if (b.me.getBoundsInParent().intersects(player.me.getBoundsInParent()) ) {
+                    Bounds enemyBounds = b.me.localToScene(b.me.getBoundsInLocal());
+                    Bounds playerBounds = player.me.localToScene(player.me.getBoundsInLocal());
+                    double x = playerBounds.getMinX() + player.width / 2;
+                    double y = playerBounds.getMinY() + player.height / 2;
+                    if((x + 10 >= enemyBounds.getMinX() && x - 10 <= enemyBounds.getMaxX()) &&
+                            (y + 10 >= enemyBounds.getMinY() && y - 10 <= enemyBounds.getMaxY())){
+                        player.subtractHp(b.getDmg());
+                    }
                     player.subtractHp(b.getDmg());
                     b.kill();
                 }
@@ -171,22 +179,47 @@ public class Engine {
     public static void initialEnemiesMaker(){
         //reminder: del is a pause between consecutive instances of fire, tim sets initial state of fire
         // setting del=5 and tim=4 will result in bullets being fired 1,6,11,16,... game ticks after creation of ship
+        //enemy 1
         Enemy Spawn= new Enemy(dot,0,1,2,true);
         Spawn.setPosition((double)SCREEN_WIDTH/2,-20,90);
         Enemy E1Spawn= new Enemy(dot,0,1,2,true);
         Enemy e = new Enemy(enemy, 0, 0.5, 1);
-        e.setModifier(infHealthIncrease,5,10);
+        e.setModifier(infHealthIncrease,5,15);
         e.addBullet(new Bullet(bullet,0,e.mvScale*2,1),2,1);
-        E1Spawn.addBullet(e,3,2);
-        Spawn.addBullet(E1Spawn,16,15);
+        E1Spawn.addBullet(e,6,4);
+        Spawn.addBullet(E1Spawn,19,18);
 
+
+        //enemy2 boss
+        Enemy e2=new Enemy(enemy2,6,0.2,1);
+        e2.hp=30;
+        e2.setModifier(healthIncreaseBy20,0,1);
+        Bullet blueBulletR=new Bullet(bluebullet,0,0.8,1);
+        blueBulletR.dmg=2;
+        blueBulletR.setModifier(rightTwister10,0,1);
+        Bullet blueBulletL=new Bullet(bluebullet,0,0.8,1);
+        blueBulletL.dmg=2;
+        blueBulletL.setModifier(leftTwister10,0,1);
+        e2.addBullet(blueBulletL,3);
+        e2.addBullet(blueBulletL.copy(90),3);
+        e2.addBullet(blueBulletL.copy(180),3);
+        e2.addBullet(blueBulletL.copy(270),3);
+        e2.addBullet(blueBulletR,3);
+        e2.addBullet(blueBulletR.copy(90),3);
+        e2.addBullet(blueBulletR.copy(180),3);
+        e2.addBullet(blueBulletR.copy(270),3);
+        Enemy E2Spawn=new Enemy(dot,7,1,2,false);
+        E2Spawn.setPosition((double)SCREEN_WIDTH/2,-10,90);
+        E2Spawn.addBullet(e2,70,30);
         enemies.add(Spawn);
+        enemies.add(E2Spawn);
 
+        //powerUp
         Enemy PowerDrop=new Enemy(dot,0,1,2,true);
         PowerDrop.setPosition((double) SCREEN_WIDTH/2,-40,90);
         Bullet powerUp=new Bullet(powerup,0,0.3,3);
         powerUp.setDeathModifier(randomPlayerBonus);
-        PowerDrop.addBullet(powerUp,21,7);
+        PowerDrop.addBullet(powerUp,15,7);
 
         enemies.add(PowerDrop);
     }

@@ -7,11 +7,10 @@ import static GalaxyConqueror.Model.Engine.random;
 import static GalaxyConqueror.Model.Model.player;
 import static GalaxyConqueror.View.View.greenbullet;
 import static java.lang.Math.abs;
-import static java.lang.Math.min;
 
 public class Modifiers {
-    public static HealthIncrease healthIncreaseTo5=new HealthIncrease(5);
-    public static HealthIncrease healthIncreaseTo10=new HealthIncrease(10);
+    public static HealthIncrease healthIncreaseBy5=new HealthIncrease(5);
+    public static HealthIncrease healthIncreaseBy20=new HealthIncrease(20);
     public static RightTwister rightTwister5=new RightTwister(5);
     public static RightTwister rightTwister10=new RightTwister(10);
     public static LeftTwister leftTwister5=new  LeftTwister(5);
@@ -44,7 +43,7 @@ public class Modifiers {
         }
         @Override
         public void update(Ship x) {
-            x.hp=min(limit,x.hp+1);
+            x.hp+=limit;
         }
         @Override
         public void update(Bullet x) {
