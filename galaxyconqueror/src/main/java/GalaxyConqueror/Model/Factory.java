@@ -5,8 +5,7 @@ import GalaxyConqueror.Model.Ships.Ship;
 
 import java.util.ArrayList;
 
-import static GalaxyConqueror.Model.Model.bullets;
-import static GalaxyConqueror.Model.Model.enemies;
+import static GalaxyConqueror.Model.Model.*;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
@@ -27,31 +26,31 @@ public class Factory{
         fireDelayS=new ArrayList<>();
         timerS=new ArrayList<>();
     }
-    public Factory add(Bullet x,int del){
+    public synchronized Factory add(Bullet x,int del){
         ammo.add(x);
         fireDelayA.add(del);
         timerA.add(0);
         return this;
     }
-    public Factory add(Enemy x,int del){
+    public synchronized Factory add(Enemy x,int del){
         ships.add(x);
         fireDelayS.add(del);
         timerS.add(0);
         return this;
     }
-    public Factory add(Bullet x,int del,int tim){
+    public synchronized Factory add(Bullet x,int del,int tim){
         ammo.add(x);
         fireDelayA.add(del);
         timerA.add(tim);
         return this;
     }
-    public Factory add(Enemy x,int del,int tim){
+    public synchronized Factory add(Enemy x,int del,int tim){
         ships.add(x);
         fireDelayS.add(del);
         timerS.add(tim);
         return this;
     }
-    public void add(Factory x) {
+    public synchronized void add(Factory x) {
         for(int i=0;i<x.ammo.size();++i) {
             ammo.add(x.ammo.get(i));
             timerA.add(x.timerA.get(i));
@@ -73,11 +72,12 @@ public class Factory{
         x.timerS.addAll(timerS);
         return x;
     }
-    public void shoot(){
+    public synchronized void shoot(){
+        int x=0;
         for (int i=0;i<ammo.size();i++) {
             if(timerA.get(i)==0) {
-                Bullet bullet =  ammo.get(i).copy();
                 ammo.get(i).modify();
+                Bullet bullet =  ammo.get(i).copy();
                 bullet.setPosition(
                         shooter.me.getLayoutX() + shooter.me.getBoundsInLocal().getWidth() / 2
                                 + (shooter.radius + bullet.me.getBoundsInLocal().getWidth() / 2)
@@ -108,6 +108,14 @@ public class Factory{
             }
             timerS.set(i, (timerS.get(i) + 1) % fireDelayS.get(i));
         }
+    }
+    public synchronized void clear(){
+        ammo.clear();
+        ships.clear();
+        fireDelayA.clear();
+        fireDelayS.clear();
+        timerA.clear();
+        timerS.clear();
     }
 
 }

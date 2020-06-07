@@ -73,20 +73,20 @@ public class Bullet {
         this(image,moveListid,moveScale,collisionId);
         this.randomSlideMovement=randomSlideMovement;
     }
-    public Bullet setModifier(Modifier Mod,int ModTimer,int ModCoolDown) {
+    public synchronized Bullet setModifier(Modifier Mod,int ModTimer,int ModCoolDown) {
         this.ModTimer=ModTimer;
         this.ModCoolDown=ModCoolDown;
         this.Mod=Mod;
         return this;
     }
-    public Bullet setDeathModifier(Modifier DeathMod){
+    public synchronized Bullet setDeathModifier(Modifier DeathMod){
         this.DeathMod=DeathMod;
         return this;
     }
-    public Bullet setModifier(Modifier Mod,int ModTimer,int ModCoolDown,Modifier DeathMod) {
+    public synchronized Bullet setModifier(Modifier Mod,int ModTimer,int ModCoolDown,Modifier DeathMod) {
         return this.setModifier(Mod,ModTimer,ModCoolDown).setDeathModifier(DeathMod);
     }
-    public void modify() {
+    public synchronized void modify() {
         if(Mod!=null) {
             ModTimer=(ModTimer+1)%ModCoolDown;
             if(ModTimer==0) {
@@ -94,14 +94,14 @@ public class Bullet {
             }
         }
     }
-    public void setPosition(double x, double y, double direction){
+    public synchronized void setPosition(double x, double y, double direction){
         this.x=x;
         this.y=y;
         me.relocate(x,y);
         me.setRotate(direction);
         root.getChildren().add(this.me);
     }
-    Bullet copy(){
+    public synchronized Bullet copy(){
         Bullet x= new Bullet(me.getImage(),mvListId,mvScale,collisionId,randomSlideMovement);
         x.hp=this.hp;
         x.dmg=this.dmg;
@@ -112,12 +112,12 @@ public class Bullet {
         x.rotateOffSet=rotateOffSet;
         return x;
     }
-    public void move (double c) {
+    public synchronized void move (double c) {
         x += c*dirx;
         y += c*diry;
         me.relocate(x,y);
     }
-    public void move(){
+    public synchronized void move(){
         if(!randomSlideMovement) {
             me.setRotate(me.getRotate() + Model.moveList.get(mvListId).get(mvListIter).rotation * mvScale);
             x += Math.cos(Math.toRadians(me.getRotate())) * Model.moveList.get(mvListId).get(mvListIter).x * mvScale
@@ -145,15 +145,15 @@ public class Bullet {
     }
 
 
-    public boolean isDead () {
+    public synchronized boolean isDead () {
         return (hp <= 0);
     }
 
-    public void subtractHp (int d) {
+    public synchronized void subtractHp (int d) {
         hp -= d;
     }
 
-    public void kill () {
+    public synchronized void kill () {
         if(DeathMod!=null)
             DeathMod.update(this);
         subtractHp(hp);

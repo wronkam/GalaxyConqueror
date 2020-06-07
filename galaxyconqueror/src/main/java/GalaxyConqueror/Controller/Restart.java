@@ -18,9 +18,8 @@ public class Restart {
         player.hp = 10;
         player.dmg=1;//nie odpowiada za faktyczne obrazenia, one sa w pociskach, tylko do wyswietlania
         score = 0;
-        player.gun.ammo.clear();
-        player.gun.ships.clear();
-        player.gun.add(new Bullet(greenbullet,0,1,0),1);
+        player.gun.clear();
+        player.gun.add(new Bullet(greenbullet,0,1,0),2);
         Engine.initiate = false;
         for(int i = enemies.size()-1; i >= 0; i--) {
                 root.getChildren().remove(enemies.get(i).me);

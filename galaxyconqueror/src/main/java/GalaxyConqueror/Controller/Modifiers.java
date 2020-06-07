@@ -6,7 +6,8 @@ import GalaxyConqueror.Model.Ships.Ship;
 import static GalaxyConqueror.Model.Engine.random;
 import static GalaxyConqueror.Model.Model.player;
 import static GalaxyConqueror.View.View.greenbullet;
-import static java.lang.Math.*;
+import static java.lang.Math.abs;
+import static java.lang.Math.min;
 
 public class Modifiers {
     public static HealthIncrease healthIncreaseTo5=new HealthIncrease(5);
@@ -22,6 +23,10 @@ public class Modifiers {
     public static RandomPlayerBonus randomPlayerBonus=new RandomPlayerBonus();
     public static InfHealthIncrease infHealthIncrease=new InfHealthIncrease();
     public static LRShower lrShower5in35=new LRShower(5,35);
+    public static LRShower lrShower10in20=new LRShower(10,20);
+    public static SidesShooter sidesShooter=new SidesShooter();
+
+
     static public class InfHealthIncrease implements Modifier{
         private int limit;
         @Override
@@ -81,7 +86,7 @@ public class Modifiers {
             this.limit=limit;
         }
         @Override
-        public void update(Ship x) {
+        public synchronized void update(Ship x) {
             x.rotateOffSet+=step;
             if(abs(x.rotateOffSet)>limit)
             {
@@ -90,7 +95,7 @@ public class Modifiers {
             }
         }
         @Override
-        public void update(Bullet x) {
+        public synchronized void update(Bullet x) {
            x.rotateOffSet+=step;
            if(abs(x.rotateOffSet)>limit)
            {
@@ -106,7 +111,7 @@ public class Modifiers {
              up=x;
         }
         @Override
-        public void update(Ship x) {
+        public synchronized void update(Ship x) {
             for(Bullet a:x.gun.ammo)
                 a.dmg+=up;
         }
@@ -128,39 +133,44 @@ public class Modifiers {
         public void update(Bullet x) {
         }
     }
-    static public class RandomPlayerBonus implements Modifier{
-        Bullet shower=new Bullet(greenbullet,0,0.8,0).setModifier(lrShower5in35,0,1);
+    static public class SidesShooter implements Modifier{
         @Override
         public void update(Ship x) {
-            int i=random.nextInt()%3;
-            System.out.println("hello"+ i);
-            switch (i){
-                case 0 : {
-                    player.dmg++;
-                    for(Bullet a:player.gun.ammo)
-                        a.dmg++;
-                    break;
-                }
-                case 1: player.hp++; break;
-                case 2: {
-                    player.gun.add(shower,5);
-                    break;
-                }
-            }
+            if(x.rotateOffSet>=0)
+                x.rotateOffSet=-90;
+            else
+                x.rotateOffSet=90;
         }
         @Override
         public void update(Bullet x) {
+            if(x.rotateOffSet>=0)
+                x.rotateOffSet=-90;
+            else
+                x.rotateOffSet=90;
+        }
+    }
+    static public class RandomPlayerBonus implements Modifier{
+        RandomPlayerBonus(){
+        }
+        @Override
+        public synchronized void update(Ship x) {
+        }
+        @Override
+        public synchronized void update(Bullet x) {
             int i=random.nextInt(3);
             switch (i){
-                case 0 : {
-                    player.dmg+=3;
+                case 0  : {
+                    player.dmg+=2;
                     for(Bullet a:player.gun.ammo)
-                        a.dmg+=3;
+                        a.dmg+=2;
                     break;
                 }
-                case 1: player.hp+=5; break;
-                case 2: {
-                    player.gun.add(new Bullet(greenbullet,0,0.8,0).setModifier(lrShower5in35,0,1),3);
+                case 1: {
+                    player.gun.add(new Bullet(greenbullet,0,0.8,0).setModifier(lrShower10in20,0,1),4);
+                    break;
+                }
+                case 2:{
+                    player.gun.add(new Bullet(greenbullet,0,0.8,0).setModifier(sidesShooter,0,1),3);
                     break;
                 }
             }

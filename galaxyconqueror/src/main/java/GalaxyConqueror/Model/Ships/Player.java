@@ -1,11 +1,9 @@
 package GalaxyConqueror.Model.Ships;
 
-import GalaxyConqueror.Model.Bullet;
 import GalaxyConqueror.Model.Factory;
 import javafx.scene.image.ImageView;
 
 import static GalaxyConqueror.Model.Constants.*;
-import static GalaxyConqueror.View.View.greenbullet;
 import static GalaxyConqueror.View.View.spaceship;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -24,7 +22,6 @@ public class Player extends Ship {
         me.setRotate(-90);
         radius=me.getBoundsInLocal().getHeight()/2;
         gun=new Factory(this);
-        gun.add(new Bullet(greenbullet,0,1,0),2);
     }
     /*
     public void move(double x, double y,double rot)
@@ -63,7 +60,7 @@ public class Player extends Ship {
         this.x -= cx;
         this.y -= cy;
     }
-    public void shoot() {
+    public synchronized void shoot() {
         gun.shoot();
     }
 }

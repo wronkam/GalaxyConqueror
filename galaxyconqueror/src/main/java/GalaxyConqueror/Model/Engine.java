@@ -165,7 +165,7 @@ public class Engine {
             Enemy starShooter = new Enemy(dot, 0, 1, 2, true);
             starShooter.addBullet(starB, random.nextInt(20) + 2, random.nextInt(10) + 3);
             starShooter.setPosition(random.nextInt(SCREEN_WIDTH), -20, 90);
-            enemies.add(starShooter);
+            //enemies.add(starShooter);
         }
     }
     public static void initialEnemiesMaker(){
@@ -186,7 +186,7 @@ public class Engine {
         PowerDrop.setPosition((double) SCREEN_WIDTH/2,-40,90);
         Bullet powerUp=new Bullet(powerup,0,0.3,3);
         powerUp.setDeathModifier(randomPlayerBonus);
-        PowerDrop.addBullet(powerUp,30,15);
+        PowerDrop.addBullet(powerUp,21,7);
 
         enemies.add(PowerDrop);
     }

@@ -20,27 +20,27 @@ public class Enemy extends Ship {
     public Enemy (Image image, int moveListid, double moveScale, int collisionId) {
         this(image, moveListid, moveScale, collisionId,false);
     }
-    public Enemy addBullet(Bullet x,int del){
+    public synchronized Enemy addBullet(Bullet x,int del){
         gun.add(x,del);
         return this;
     }
-    public Enemy addBullet(Enemy x,int del){
+    public synchronized Enemy addBullet(Enemy x,int del){
         gun.add(x,del);
         return this;
     }
-    public Enemy addBullet(Bullet x,int del,int tim){
+    public synchronized Enemy addBullet(Bullet x,int del,int tim){
         gun.add(x,del,tim);
         return this;
     }
-    public Enemy addBullet(Enemy x,int del,int tim){
+    public synchronized Enemy addBullet(Enemy x,int del,int tim){
         gun.add(x,del,tim);
         return this;
     }
-    public Enemy addBullet(Factory x){
+    public synchronized Enemy addBullet(Factory x){
         gun.add(x);
         return this;
     }
-    public Enemy copy(){
+    public synchronized Enemy copy(){
         Enemy x= new Enemy(this.me.getImage(),this.mvListId,this.mvScale,this.collisionId,this.randomSlideMovement).addBullet(this.gun);
         x.hp=this.hp;
         x.dmg=this.dmg;
@@ -52,7 +52,7 @@ public class Enemy extends Ship {
         x.rotateOffSet=rotateOffSet;
         return x;
     }
-    public void modify() {
+    public synchronized void modify() {
         if(Mod!=null) {
             ModTimer=(ModTimer+1)%ModCoolDown;
             if(ModTimer==0) {
@@ -60,11 +60,11 @@ public class Enemy extends Ship {
             }
         }
     }
-    public void autoMove () {
+    public synchronized void autoMove () {
         this.move();
     }
 
-    public void autoShoot() {
+    public synchronized void autoShoot() {
         gun.shoot();
         //hangar.shoot(); TO BE ADDED IN CASE WE WANT IT, alongside addShip in both variants and alternative shoot in factory that adds to enemy list
     }
