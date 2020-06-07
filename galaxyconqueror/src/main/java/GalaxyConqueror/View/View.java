@@ -26,6 +26,7 @@ public class View<bgM> {
     public static Image htpbg = new Image("file:resources/htpbg.jpg", SCREEN_WIDTH, SCREEN_HEIGHT+60, true, true);
     public static Image bg = new Image("file:resources/bg.jpg", SCREEN_WIDTH, SCREEN_HEIGHT+60, true, true);
     public static Image powerup = new Image("file:resources/powerup.png", 75, 75, true,true);
+    public static Image creditsbg = new Image("file:resources/creditsbg.jpg", SCREEN_WIDTH, SCREEN_HEIGHT+60, true, true);
     static File Ama ;
     static Media bgM ;
     public static MediaPlayer bgPlayer ;

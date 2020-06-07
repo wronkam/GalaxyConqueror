@@ -30,17 +30,20 @@ public class Menu {
         Button NewGameButton = new Button("New Game");
         Button SettingsButton = new Button("How To Play");
         Button HsButton = new Button("Highscores");
+        Button CreditsButton = new Button("Credits");
         Button ExitButton = new Button("Exit");
 
         NewGameButton.setPrefSize(200, 60);
         SettingsButton.setPrefSize(200, 60);
         HsButton.setPrefSize(200, 60);
+        CreditsButton.setPrefSize(200, 60);
         ExitButton.setPrefSize(200, 60);
 
         ArrayList<Button> buttons = new ArrayList<>();
         buttons.add(NewGameButton);
         buttons.add(SettingsButton);
         buttons.add(HsButton);
+        buttons.add(CreditsButton);
         buttons.add(ExitButton);
 
         NewGameButton.setOnAction(value -> Controller.start(stage));
@@ -48,6 +51,10 @@ public class Menu {
                 HowToPlay.start(stage));
         HsButton.setOnAction(value ->
                 Highscores.start(stage));
+        CreditsButton.setOnAction(value ->
+        {
+            Credits.start(stage);
+        });
         ExitButton.setOnAction(value -> {
             if(ExitButton.getText().equals("Exit")) {
                 ExitButton.setText("Are you sure?");
@@ -64,6 +71,7 @@ public class Menu {
         menubox.getChildren().add(NewGameButton);
         menubox.getChildren().add(SettingsButton);
         menubox.getChildren().add(HsButton);
+        menubox.getChildren().add(CreditsButton);
         menubox.getChildren().add(ExitButton);
 
         BorderPane test = new BorderPane(menubox);
