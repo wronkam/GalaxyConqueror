@@ -61,7 +61,7 @@ public class Controller {
                     bgPlayer.seek(Duration.ZERO);
                 }
             });
-            bgPlayer.setVolume(0.15);
+            bgPlayer.setVolume(0.1);
         }
         try {
             if(first == 0) {
