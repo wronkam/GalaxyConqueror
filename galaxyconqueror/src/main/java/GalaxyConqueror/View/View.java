@@ -32,7 +32,7 @@ public class View<bgM> {
     public static MediaPlayer bgPlayer ;
     public static void set() {
         if (canIConfigureJavaFXMedia) {
-             Ama = new File("resources/Amanita.mp3");
+             Ama = new File("resources/Amanita.wav");
              bgM = new Media(Ama.toURI().toString());
              bgPlayer = new MediaPlayer(bgM);
         }
