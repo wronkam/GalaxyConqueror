@@ -11,7 +11,6 @@
 - Use A and D keys to rotate your spaceship
 - Press SPACE to shoot</br>
 ## Setup:
-###### <i>Version without music</i>
 1. Clone the repository <code> git clone https://github.com/wronkam/GalaxyConqueror.git </code> </br>
 2. Import Project in IntelliJ IDEA using pom.xml file (Intellij might ask to download JDK 11 in some iterration, which is an essential asset)</br>
 3. In Project Structure add /lib subfolder of javafx library in version 11 or newer </br>
